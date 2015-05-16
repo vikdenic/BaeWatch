@@ -110,16 +110,8 @@
 				932AF89E1B06946A007E859D /* Images.xcassets */,
 				932AF8A01B06946A007E859D /* LaunchScreen.xib */,
 				932AF8911B06946A007E859D /* Supporting Files */,
-				932AF8EA1B06DDB2007E859D /* User.h */,
-				932AF8EB1B06DDB2007E859D /* User.m */,
-				932AF8F61B079AC9007E859D /* Profile.h */,
-				932AF8F71B079AC9007E859D /* Profile.m */,
-				932AF8981B06946A007E859D /* RegisterViewController.h */,
-				932AF8991B06946A007E859D /* RegisterViewController.m */,
-				932AF8ED1B06E214007E859D /* HomeViewController.h */,
-				932AF8EE1B06E214007E859D /* HomeViewController.m */,
-				932AF8F91B07ABA2007E859D /* UniversalProfile.h */,
-				932AF8FA1B07ABA2007E859D /* UniversalProfile.m */,
+				932AF8FC1B07C626007E859D /* View Controllers */,
+				932AF8FD1B07C630007E859D /* Models */,
 			);
 			path = BaeWatch;
 			sourceTree = "<group>";
@@ -149,6 +141,30 @@
 				932AF8AC1B06946A007E859D /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		932AF8FC1B07C626007E859D /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				932AF8981B06946A007E859D /* RegisterViewController.h */,
+				932AF8991B06946A007E859D /* RegisterViewController.m */,
+				932AF8ED1B06E214007E859D /* HomeViewController.h */,
+				932AF8EE1B06E214007E859D /* HomeViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		932AF8FD1B07C630007E859D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				932AF8EA1B06DDB2007E859D /* User.h */,
+				932AF8EB1B06DDB2007E859D /* User.m */,
+				932AF8F61B079AC9007E859D /* Profile.h */,
+				932AF8F71B079AC9007E859D /* Profile.m */,
+				932AF8F91B07ABA2007E859D /* UniversalProfile.h */,
+				932AF8FA1B07ABA2007E859D /* UniversalProfile.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 		A68DF4331B73B20DE6C3AD19 /* Frameworks */ = {
