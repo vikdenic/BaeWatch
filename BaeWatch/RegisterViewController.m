@@ -47,13 +47,28 @@
         }
         else if (user.isNew) {
             NSLog(@"User signed up and logged in through Facebook!");
+            [self setFbId];
         }
         else
         {
             NSLog(@"User logged in through Facebook!");
-            [self _loadData];
+//            [self _loadData];
         }
     }];
+}
+
+-(void)setFbId
+{
+    FBSDKGraphRequest *friendsRequest = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
+    FBSDKGraphRequestConnection *connection = [[FBSDKGraphRequestConnection alloc] init];
+    [connection addRequest:friendsRequest
+         completionHandler:^(FBSDKGraphRequestConnection *innerConnection, NSDictionary *result, NSError *error) {
+
+             [[User currentUser] setObject:[result objectForKey:@"id"] forKey:@"fbId"];
+             [[User currentUser] saveInBackground];
+         }];
+
+    [connection start];
 }
 
 - (void)_loadData
@@ -96,6 +111,5 @@
         }
     }];
 }
-
 
 @end
