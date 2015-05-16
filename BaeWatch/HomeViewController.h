@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  HomeViewController.h
 //  BaeWatch
 //
 //  Created by Vik Denic on 5/15/15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface HomeViewController : UIViewController
 
 @end
-
