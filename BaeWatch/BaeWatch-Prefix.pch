@@ -15,11 +15,17 @@
 //Parse
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
+
+//Model Classes
 #import "User.h"
+#import "Profile.h"
 
 //Facebook
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
+
+//Singeltons
+#import "UniversalProfile.h"
 
 #endif

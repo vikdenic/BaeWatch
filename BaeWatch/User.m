@@ -15,6 +15,8 @@
     [self registerSubclass];
 }
 
+@dynamic fbId;
+
 +(User *)currentUser
 {
     return (User *)[PFUser currentUser];

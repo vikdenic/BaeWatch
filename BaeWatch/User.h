@@ -10,6 +10,8 @@
 
 @interface User : PFUser <PFSubclassing>
 
+@property NSString *fbId;
+
 +(void)load;
 
 +(User *)currentUser;
