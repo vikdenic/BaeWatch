@@ -17,6 +17,7 @@
 		932AF8AE1B06946A007E859D /* BaeWatchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 932AF8AD1B06946A007E859D /* BaeWatchTests.m */; };
 		932AF8EC1B06DDB2007E859D /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 932AF8EB1B06DDB2007E859D /* User.m */; };
 		932AF8EF1B06E214007E859D /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 932AF8EE1B06E214007E859D /* HomeViewController.m */; };
+		932AF8F51B06ED78007E859D /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 932AF8F21B06ED78007E859D /* FBSDKShareKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,7 @@
 		932AF8EB1B06DDB2007E859D /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		932AF8ED1B06E214007E859D /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		932AF8EE1B06E214007E859D /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		932AF8F21B06ED78007E859D /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKShareKit.framework; path = ../../Documents/FacebookSDK/FBSDKShareKit.framework; sourceTree = "<group>"; };
 		B9C9DBF197AEE655DFD74922 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -58,6 +60,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				932AF8F51B06ED78007E859D /* FBSDKShareKit.framework in Frameworks */,
 				79DDD1499272950D69587FF7 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -141,6 +144,7 @@
 		A68DF4331B73B20DE6C3AD19 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				932AF8F21B06ED78007E859D /* FBSDKShareKit.framework */,
 				13BEBBB78B317F6AF75FE180 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -421,6 +425,10 @@
 			baseConfigurationReference = 75BA9F5337D0EB08A791BCC8 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/viktordenic/Documents/FacebookSDK,
+				);
 				GCC_PREFIX_HEADER = "BaeWatch/BaeWatch-Prefix.pch";
 				INFOPLIST_FILE = BaeWatch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -433,6 +441,10 @@
 			baseConfigurationReference = B9C9DBF197AEE655DFD74922 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/viktordenic/Documents/FacebookSDK,
+				);
 				GCC_PREFIX_HEADER = "BaeWatch/BaeWatch-Prefix.pch";
 				INFOPLIST_FILE = BaeWatch/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

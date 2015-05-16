@@ -84,30 +84,6 @@
                                     <action selector="onRegisterTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Wkf-mR-ku3"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c1k-Xf-Xw8">
-                                <rect key="frame" x="199" y="331" width="203" height="30"/>
-                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="203" id="9tm-Vr-g4D"/>
-                                    <constraint firstAttribute="height" constant="30" id="OCN-HZ-rWE"/>
-                                </constraints>
-                                <state key="normal" title="Log in with Facebook">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="9tm-Vr-g4D"/>
-                                        <exclude reference="OCN-HZ-rWE"/>
-                                    </mask>
-                                </variation>
-                                <variation key="widthClass=compact">
-                                    <mask key="constraints">
-                                        <include reference="9tm-Vr-g4D"/>
-                                        <include reference="OCN-HZ-rWE"/>
-                                    </mask>
-                                </variation>
-                            </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A2c-xV-egV">
                                 <rect key="frame" x="199" y="214" width="203" height="30"/>
                                 <constraints>
@@ -129,19 +105,51 @@
                                     </mask>
                                 </variation>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HpM-rv-L89">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.50196081399917603" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="203" id="Ld4-5m-rXp"/>
+                                    <constraint firstAttribute="height" constant="30" id="XSt-4b-qmh"/>
+                                </constraints>
+                                <state key="normal" title="Login with Facebook">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Ld4-5m-rXp"/>
+                                        <exclude reference="XSt-4b-qmh"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Ld4-5m-rXp"/>
+                                        <include reference="XSt-4b-qmh"/>
+                                    </mask>
+                                </variation>
+                                <connections>
+                                    <action selector="onFBLoginTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="l1a-Kk-VJg"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="c1k-Xf-Xw8" firstAttribute="top" secondItem="348-E9-GzL" secondAttribute="bottom" constant="26" id="2au-g0-kku"/>
                             <constraint firstItem="A2c-xV-egV" firstAttribute="centerX" secondItem="348-E9-GzL" secondAttribute="centerX" id="CLH-Tc-Dcq"/>
-                            <constraint firstItem="c1k-Xf-Xw8" firstAttribute="centerX" secondItem="348-E9-GzL" secondAttribute="centerX" id="Hia-7I-2zo"/>
                             <constraint firstItem="A2c-xV-egV" firstAttribute="top" secondItem="sSn-ek-FdU" secondAttribute="bottom" constant="19" id="JPF-fT-J2D"/>
-                            <constraint firstAttribute="centerY" secondItem="348-E9-GzL" secondAttribute="centerY" id="K8H-t9-pMn"/>
+                            <constraint firstAttribute="centerY" secondItem="348-E9-GzL" secondAttribute="centerY" id="K8H-t9-pMn">
+                                <variation key="widthClass=compact" constant="68"/>
+                            </constraint>
+                            <constraint firstItem="HpM-rv-L89" firstAttribute="top" secondItem="348-E9-GzL" secondAttribute="bottom" constant="21" id="LwS-aN-Wse"/>
                             <constraint firstItem="sSn-ek-FdU" firstAttribute="centerX" secondItem="A2c-xV-egV" secondAttribute="centerX" id="ghJ-Wh-b6J"/>
+                            <constraint firstItem="HpM-rv-L89" firstAttribute="centerX" secondItem="348-E9-GzL" secondAttribute="centerX" id="mLi-K9-te8"/>
                             <constraint firstAttribute="centerX" secondItem="348-E9-GzL" secondAttribute="centerX" id="qCB-Hu-gvP"/>
                             <constraint firstItem="348-E9-GzL" firstAttribute="top" secondItem="A2c-xV-egV" secondAttribute="bottom" constant="25" id="tS1-k9-mq9"/>
                         </constraints>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="HpM-rv-L89"/>
+                            </mask>
                             <mask key="constraints">
                                 <exclude reference="ghJ-Wh-b6J"/>
                                 <exclude reference="CLH-Tc-Dcq"/>
@@ -149,11 +157,14 @@
                                 <exclude reference="K8H-t9-pMn"/>
                                 <exclude reference="qCB-Hu-gvP"/>
                                 <exclude reference="tS1-k9-mq9"/>
-                                <exclude reference="2au-g0-kku"/>
-                                <exclude reference="Hia-7I-2zo"/>
+                                <exclude reference="LwS-aN-Wse"/>
+                                <exclude reference="mLi-K9-te8"/>
                             </mask>
                         </variation>
                         <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="HpM-rv-L89"/>
+                            </mask>
                             <mask key="constraints">
                                 <include reference="ghJ-Wh-b6J"/>
                                 <include reference="CLH-Tc-Dcq"/>
@@ -161,8 +172,8 @@
                                 <include reference="K8H-t9-pMn"/>
                                 <include reference="qCB-Hu-gvP"/>
                                 <include reference="tS1-k9-mq9"/>
-                                <include reference="2au-g0-kku"/>
-                                <include reference="Hia-7I-2zo"/>
+                                <include reference="LwS-aN-Wse"/>
+                                <include reference="mLi-K9-te8"/>
                             </mask>
                         </variation>
                     </view>
@@ -173,7 +184,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="336" y="-204"/>
+            <point key="canvasLocation" x="327" y="-203"/>
         </scene>
     </scenes>
 </document>
