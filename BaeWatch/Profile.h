@@ -12,7 +12,9 @@
 
 @property NSString *name;
 @property User *user;
+@property PFFile *profileImageFile;
 
++(void)load;
 +(NSString *)parseClassName;
 
 -(instancetype)initWithUser: (User *)user;

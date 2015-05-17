@@ -48,6 +48,7 @@
         else if (user.isNew) {
             NSLog(@"User signed up and logged in through Facebook!");
             [self setUsersFbId];
+            [self createAndSaveProfile];
         }
         else
         {
@@ -59,6 +60,9 @@
 
 -(void)createAndSaveProfile
 {
+    User *currentUser = [User currentUser];
+    NSLog(@"%@", currentUser.username);
+
     Profile *profile = [[Profile alloc] initWithUser:[User currentUser]];
     [profile saveInBackground];
 
@@ -95,13 +99,14 @@
 
             NSString *facebookID = userData[@"id"];
             NSString *name = userData[@"name"];
-            NSString *location = userData[@"location"][@"name"];
+//            NSString *location = userData[@"location"][@"name"];
 
-            NSLog(@"%@ %@ %@", facebookID, name, location);
+            NSLog(@"%@ %@", facebookID, name);
 
-            PFUser *currentUser = [PFUser currentUser];
-            [currentUser setObject:name forKey:@"name"];
-            [currentUser saveInBackground];
+            Profile *currentProfile = [[UniversalProfile sharedInstance] profile];
+            currentProfile.name = name;
+
+            [currentProfile saveInBackground];
 
             NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
 
@@ -116,8 +121,8 @@
                  if (connectionError == nil && data != nil) {
 
                      PFFile *file = [PFFile fileWithData:data];
-                     [currentUser setObject:file forKey:@"profileImage"];
-                     [currentUser saveInBackground];
+                     [currentProfile setProfileImageFile:file];
+                     [currentProfile saveInBackground];
                  }
              }];
         }

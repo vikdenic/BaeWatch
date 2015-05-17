@@ -12,6 +12,12 @@
 
 @dynamic name;
 @dynamic user;
+@dynamic profileImageFile;
+
++(void)load
+{
+    [self registerSubclass];
+}
 
 +(NSString *)parseClassName
 {

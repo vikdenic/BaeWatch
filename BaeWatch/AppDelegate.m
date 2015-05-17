@@ -23,6 +23,11 @@
 
 
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
+
+    if ([User currentUser])
+    {
+        [self setProfileSingleton];
+    }
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
@@ -43,6 +48,20 @@
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     [FBSDKAppEvents activateApp];
+}
+
+-(void)setProfileSingleton
+{
+    PFQuery *profileQuery = [PFQuery queryWithClassName:@"Profile"];
+    [profileQuery includeKey:@"user"];
+    [profileQuery whereKey:@"user" equalTo:[User currentUser]];
+
+    [profileQuery getFirstObjectInBackgroundWithBlock:^(PFObject *profile, NSError *error) {
+
+        Profile *currentProfile = (Profile *) profile;
+        [[UniversalProfile sharedInstance] setProfile:currentProfile];
+        NSLog(@"%@", currentProfile.name);
+    }];
 }
 
 @end
