@@ -28,4 +28,7 @@
 //Singeltons
 #import "UniversalProfile.h"
 
+//Utilities
+#import "Constants.h"
+
 #endif

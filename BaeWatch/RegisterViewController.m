@@ -49,11 +49,13 @@
             NSLog(@"User signed up and logged in through Facebook!");
             [self setUsersFbId];
             [self createAndSaveProfile];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
         else
         {
             NSLog(@"User logged in through Facebook!");
             [self setProfileSingleton];
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
 }
@@ -105,6 +107,7 @@
             Profile *currentProfile = [[UniversalProfile sharedInstance] profile];
             currentProfile.name = name;
 
+
             [currentProfile saveInBackground];
 
             NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
@@ -138,6 +141,7 @@
 
         Profile *currentProfile = (Profile *) profile;
         [[UniversalProfile sharedInstance] setProfile:currentProfile];
+        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNewUser object:self];
         [self _loadData];
     }];
 }

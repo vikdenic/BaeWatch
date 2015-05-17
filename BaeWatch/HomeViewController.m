@@ -12,7 +12,7 @@
 
 @end
 
-NSString *const kHomeToRegisterSegue = @"HomeToRegisterSegue";
+NSString *const kSegueHomeToRegister = @"HomeToRegisterSegue";
 
 @implementation HomeViewController
 
@@ -27,7 +27,7 @@ NSString *const kHomeToRegisterSegue = @"HomeToRegisterSegue";
 
     if ([User currentUser] == nil)
     {
-        [self performSegueWithIdentifier:kHomeToRegisterSegue sender:self];
+        [self performSegueWithIdentifier:kSegueHomeToRegister sender:self];
     }
     else
     {
@@ -59,7 +59,7 @@ NSString *const kHomeToRegisterSegue = @"HomeToRegisterSegue";
               // with the current user
               [friendQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
                   
-                  NSLog(@"%@", [objects objectAtIndex:0]);
+                  NSLog(@"Friends are: %@", [objects objectAtIndex:0]);
               }];
          }];
     // start the actual request

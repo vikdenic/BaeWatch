@@ -20,6 +20,9 @@
 		932AF8F51B06ED78007E859D /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 932AF8F21B06ED78007E859D /* FBSDKShareKit.framework */; };
 		932AF8F81B079AC9007E859D /* Profile.m in Sources */ = {isa = PBXBuildFile; fileRef = 932AF8F71B079AC9007E859D /* Profile.m */; };
 		932AF8FB1B07ABA2007E859D /* UniversalProfile.m in Sources */ = {isa = PBXBuildFile; fileRef = 932AF8FA1B07ABA2007E859D /* UniversalProfile.m */; };
+		932AF9031B08F6F6007E859D /* MyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 932AF9021B08F6F6007E859D /* MyProfileViewController.m */; };
+		932AF9061B08F796007E859D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 932AF9051B08F796007E859D /* SettingsViewController.m */; };
+		93A59C631B090D6A00D2AB76 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A59C621B090D6A00D2AB76 /* Constants.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +61,12 @@
 		932AF8F71B079AC9007E859D /* Profile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Profile.m; sourceTree = "<group>"; };
 		932AF8F91B07ABA2007E859D /* UniversalProfile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UniversalProfile.h; sourceTree = "<group>"; };
 		932AF8FA1B07ABA2007E859D /* UniversalProfile.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UniversalProfile.m; sourceTree = "<group>"; };
+		932AF9011B08F6F6007E859D /* MyProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyProfileViewController.h; sourceTree = "<group>"; };
+		932AF9021B08F6F6007E859D /* MyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProfileViewController.m; sourceTree = "<group>"; };
+		932AF9041B08F796007E859D /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		932AF9051B08F796007E859D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		93A59C611B090D6A00D2AB76 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		93A59C621B090D6A00D2AB76 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		B9C9DBF197AEE655DFD74922 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -110,6 +119,7 @@
 				932AF89E1B06946A007E859D /* Images.xcassets */,
 				932AF8A01B06946A007E859D /* LaunchScreen.xib */,
 				932AF8911B06946A007E859D /* Supporting Files */,
+				93A59C641B090D7500D2AB76 /* Utilities */,
 				932AF8FC1B07C626007E859D /* View Controllers */,
 				932AF8FD1B07C630007E859D /* Models */,
 			);
@@ -150,6 +160,10 @@
 				932AF8991B06946A007E859D /* RegisterViewController.m */,
 				932AF8ED1B06E214007E859D /* HomeViewController.h */,
 				932AF8EE1B06E214007E859D /* HomeViewController.m */,
+				932AF9011B08F6F6007E859D /* MyProfileViewController.h */,
+				932AF9021B08F6F6007E859D /* MyProfileViewController.m */,
+				932AF9041B08F796007E859D /* SettingsViewController.h */,
+				932AF9051B08F796007E859D /* SettingsViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -165,6 +179,15 @@
 				932AF8FA1B07ABA2007E859D /* UniversalProfile.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		93A59C641B090D7500D2AB76 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				93A59C611B090D6A00D2AB76 /* Constants.h */,
+				93A59C621B090D6A00D2AB76 /* Constants.m */,
+			);
+			name = Utilities;
 			sourceTree = "<group>";
 		};
 		A68DF4331B73B20DE6C3AD19 /* Frameworks */ = {
@@ -322,7 +345,10 @@
 			files = (
 				932AF8EC1B06DDB2007E859D /* User.m in Sources */,
 				932AF8FB1B07ABA2007E859D /* UniversalProfile.m in Sources */,
+				932AF9031B08F6F6007E859D /* MyProfileViewController.m in Sources */,
+				932AF9061B08F796007E859D /* SettingsViewController.m in Sources */,
 				932AF89A1B06946A007E859D /* RegisterViewController.m in Sources */,
+				93A59C631B090D6A00D2AB76 /* Constants.m in Sources */,
 				932AF8971B06946A007E859D /* AppDelegate.m in Sources */,
 				932AF8F81B079AC9007E859D /* Profile.m in Sources */,
 				932AF8EF1B06E214007E859D /* HomeViewController.m in Sources */,
@@ -514,6 +540,7 @@
 					"\"Social\"",
 					"-weak_framework",
 					"\"UIKit\"",
+					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -585,6 +612,7 @@
 					"\"Social\"",
 					"-weak_framework",
 					"\"UIKit\"",
+					"-ObjC",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

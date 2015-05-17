@@ -60,8 +60,16 @@
 
         Profile *currentProfile = (Profile *) profile;
         [[UniversalProfile sharedInstance] setProfile:currentProfile];
-        NSLog(@"%@", currentProfile.name);
+        [self setTabBar];
+        NSLog(@"Already logged in as: %@", currentProfile.name);
     }];
+}
+
+-(void)setTabBar
+{
+    UITabBarController *tbc = (UITabBarController *)self.window.rootViewController;
+    UITabBarItem *tabItem = [tbc.tabBar.items objectAtIndex:1];
+    [tabItem setTitle:[UniversalProfile sharedInstance].profile.name];
 }
 
 @end
