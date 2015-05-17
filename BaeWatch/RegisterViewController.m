@@ -53,20 +53,18 @@
         else
         {
             NSLog(@"User logged in through Facebook!");
-//            [self _loadData];
+            [self setProfileSingleton];
         }
     }];
 }
 
 -(void)createAndSaveProfile
 {
-    User *currentUser = [User currentUser];
-    NSLog(@"%@", currentUser.username);
-
     Profile *profile = [[Profile alloc] initWithUser:[User currentUser]];
     [profile saveInBackground];
 
     [[UniversalProfile sharedInstance] setProfile:profile];
+    [self _loadData];
 }
 
 -(void)setUsersFbId
@@ -93,7 +91,8 @@
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
 
     [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-        if (!error) {
+        if (!error)
+        {
             // result is a dictionary with the user's Facebook data
             NSDictionary *userData = (NSDictionary *)result;
 
@@ -101,7 +100,7 @@
             NSString *name = userData[@"name"];
 //            NSString *location = userData[@"location"][@"name"];
 
-            NSLog(@"%@ %@", facebookID, name);
+//            NSLog(@"%@ %@", facebookID, name);
 
             Profile *currentProfile = [[UniversalProfile sharedInstance] profile];
             currentProfile.name = name;
@@ -126,6 +125,20 @@
                  }
              }];
         }
+    }];
+}
+
+-(void)setProfileSingleton
+{
+    PFQuery *profileQuery = [PFQuery queryWithClassName:@"Profile"];
+    [profileQuery includeKey:@"user"];
+    [profileQuery whereKey:@"user" equalTo:[User currentUser]];
+
+    [profileQuery getFirstObjectInBackgroundWithBlock:^(PFObject *profile, NSError *error) {
+
+        Profile *currentProfile = (Profile *) profile;
+        [[UniversalProfile sharedInstance] setProfile:currentProfile];
+        [self _loadData];
     }];
 }
 
