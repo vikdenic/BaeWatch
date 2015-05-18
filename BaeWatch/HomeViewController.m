@@ -31,7 +31,10 @@ NSString *const kSegueHomeToRegister = @"HomeToRegisterSegue";
     }
     else
     {
-        [self findFBFriends];
+        if ([User currentUser].fbId != nil)
+        {
+            [self findFBFriends];
+        }
     }
 }
 

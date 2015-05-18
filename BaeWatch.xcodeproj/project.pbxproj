@@ -23,6 +23,9 @@
 		932AF9031B08F6F6007E859D /* MyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 932AF9021B08F6F6007E859D /* MyProfileViewController.m */; };
 		932AF9061B08F796007E859D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 932AF9051B08F796007E859D /* SettingsViewController.m */; };
 		93A59C631B090D6A00D2AB76 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A59C621B090D6A00D2AB76 /* Constants.m */; };
+		93A59C671B0989E000D2AB76 /* NameEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A59C661B0989E000D2AB76 /* NameEntryViewController.m */; };
+		93A59C6B1B098BAF00D2AB76 /* UITextField+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A59C6A1B098BAF00D2AB76 /* UITextField+Custom.m */; };
+		93A59C6F1B098CEF00D2AB76 /* NameEntryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A59C6E1B098CEF00D2AB76 /* NameEntryTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +70,12 @@
 		932AF9051B08F796007E859D /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		93A59C611B090D6A00D2AB76 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		93A59C621B090D6A00D2AB76 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		93A59C651B0989E000D2AB76 /* NameEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameEntryViewController.h; sourceTree = "<group>"; };
+		93A59C661B0989E000D2AB76 /* NameEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameEntryViewController.m; sourceTree = "<group>"; };
+		93A59C691B098BAF00D2AB76 /* UITextField+Custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Custom.h"; sourceTree = "<group>"; };
+		93A59C6A1B098BAF00D2AB76 /* UITextField+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Custom.m"; sourceTree = "<group>"; };
+		93A59C6D1B098CEF00D2AB76 /* NameEntryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameEntryTableViewCell.h; sourceTree = "<group>"; };
+		93A59C6E1B098CEF00D2AB76 /* NameEntryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameEntryTableViewCell.m; sourceTree = "<group>"; };
 		B9C9DBF197AEE655DFD74922 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,6 +130,7 @@
 				932AF8911B06946A007E859D /* Supporting Files */,
 				93A59C641B090D7500D2AB76 /* Utilities */,
 				932AF8FC1B07C626007E859D /* View Controllers */,
+				93A59C6C1B098CC800D2AB76 /* Custom Cells */,
 				932AF8FD1B07C630007E859D /* Models */,
 			);
 			path = BaeWatch;
@@ -164,6 +174,8 @@
 				932AF9021B08F6F6007E859D /* MyProfileViewController.m */,
 				932AF9041B08F796007E859D /* SettingsViewController.h */,
 				932AF9051B08F796007E859D /* SettingsViewController.m */,
+				93A59C651B0989E000D2AB76 /* NameEntryViewController.h */,
+				93A59C661B0989E000D2AB76 /* NameEntryViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -186,8 +198,19 @@
 			children = (
 				93A59C611B090D6A00D2AB76 /* Constants.h */,
 				93A59C621B090D6A00D2AB76 /* Constants.m */,
+				93A59C691B098BAF00D2AB76 /* UITextField+Custom.h */,
+				93A59C6A1B098BAF00D2AB76 /* UITextField+Custom.m */,
 			);
 			name = Utilities;
+			sourceTree = "<group>";
+		};
+		93A59C6C1B098CC800D2AB76 /* Custom Cells */ = {
+			isa = PBXGroup;
+			children = (
+				93A59C6D1B098CEF00D2AB76 /* NameEntryTableViewCell.h */,
+				93A59C6E1B098CEF00D2AB76 /* NameEntryTableViewCell.m */,
+			);
+			name = "Custom Cells";
 			sourceTree = "<group>";
 		};
 		A68DF4331B73B20DE6C3AD19 /* Frameworks */ = {
@@ -343,9 +366,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93A59C6B1B098BAF00D2AB76 /* UITextField+Custom.m in Sources */,
 				932AF8EC1B06DDB2007E859D /* User.m in Sources */,
 				932AF8FB1B07ABA2007E859D /* UniversalProfile.m in Sources */,
+				93A59C6F1B098CEF00D2AB76 /* NameEntryTableViewCell.m in Sources */,
 				932AF9031B08F6F6007E859D /* MyProfileViewController.m in Sources */,
+				93A59C671B0989E000D2AB76 /* NameEntryViewController.m in Sources */,
 				932AF9061B08F796007E859D /* SettingsViewController.m in Sources */,
 				932AF89A1B06946A007E859D /* RegisterViewController.m in Sources */,
 				93A59C631B090D6A00D2AB76 /* Constants.m in Sources */,

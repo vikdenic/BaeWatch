@@ -15,6 +15,8 @@
 
 @end
 
+NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
+
 @implementation RegisterViewController
 
 - (void)viewDidLoad
@@ -25,7 +27,8 @@
 - (IBAction)onRegisterTapped:(UIButton *)sender
 {
     [User createUserWithUserName:self.usernameTextField.text withPassword:self.passwordTextField.text completion:^(BOOL result, NSError *error) {
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self createAndSaveProfile];
+        [self performSegueWithIdentifier:kSegueIDRegisterToNameEntry sender:self];
     }];
 }
 
@@ -66,7 +69,11 @@
     [profile saveInBackground];
 
     [[UniversalProfile sharedInstance] setProfile:profile];
-    [self _loadData];
+
+    if ([User currentUser].fbId != nil)
+    {
+        [self _loadData];
+    }
 }
 
 -(void)setUsersFbId
