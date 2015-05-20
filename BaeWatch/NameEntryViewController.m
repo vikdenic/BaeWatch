@@ -9,7 +9,10 @@
 #import "NameEntryViewController.h"
 #import "NameEntryTableViewCell.h"
 
-@interface NameEntryViewController () <UITableViewDataSource, UITableViewDelegate, NameEntryTableViewCellDelegate>
+@interface NameEntryViewController () <UITableViewDataSource, UITableViewDelegate, NameEntryTableViewCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property UIImage *selectedImage;
+@property (strong, nonatomic) IBOutlet UITableView *entryTableView;
 
 @end
 
@@ -20,7 +23,7 @@ NSString *const kCellIDNameEntry =  @"NameEntryCell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.navigationController.navigationBar setHidden:YES];
+    [self.navigationItem setHidesBackButton:YES];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -35,9 +38,27 @@ NSString *const kCellIDNameEntry =  @"NameEntryCell";
     return 1;
 }
 
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 150;
+}
+
 -(void)nameEntryCell:(id)cell didTapEditButton:(UIButton *)button
 {
+    UIImagePickerController *imagePicker = [UIImagePickerController new];
+    imagePicker.allowsEditing = YES;
+    imagePicker.delegate = self;
 
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+        self.selectedImage = info[UIImagePickerControllerEditedImage];
+        NameEntryTableViewCell *cell = (NameEntryTableViewCell *) [self.entryTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+        cell.profileImageView.image = self.selectedImage;
+    }];
 }
 
 @end

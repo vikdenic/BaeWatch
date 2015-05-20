@@ -13,7 +13,7 @@
 -(void)addBottomBorder
 {
     CALayer *bottomBorder = [CALayer new];
-    bottomBorder.frame = CGRectMake(0.0, self.frame.size.height - 1, self.frame.size.width, 1.0);
+    bottomBorder.frame = CGRectMake(0.0, self.frame.size.height - 1, self.frame.size.width + 90, 1.0);
     bottomBorder.backgroundColor = [UIColor groupTableViewBackgroundColor].CGColor;
     [self.layer addSublayer:bottomBorder];
 }
