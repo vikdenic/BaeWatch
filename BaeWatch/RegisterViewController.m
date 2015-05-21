@@ -112,7 +112,7 @@ NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
 //            NSLog(@"%@ %@", facebookID, name);
 
             Profile *currentProfile = [[UniversalProfile sharedInstance] profile];
-            currentProfile.name = name;
+            currentProfile.fullName = name;
 
 
             [currentProfile saveInBackground];

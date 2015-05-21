@@ -13,6 +13,7 @@
 
 @property UIImage *selectedImage;
 @property (strong, nonatomic) IBOutlet UITableView *entryTableView;
+@property (strong, nonatomic) NameEntryTableViewCell *entryCell;
 
 @end
 
@@ -24,6 +25,12 @@ NSString *const kCellIDNameEntry =  @"NameEntryCell";
 {
     [super viewDidLoad];
     [self.navigationItem setHidesBackButton:YES];
+}
+
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    self.entryCell = (NameEntryTableViewCell *) [self.entryTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -55,10 +62,35 @@ NSString *const kCellIDNameEntry =  @"NameEntryCell";
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
 {
     [self dismissViewControllerAnimated:YES completion:^{
+
         self.selectedImage = info[UIImagePickerControllerEditedImage];
-        NameEntryTableViewCell *cell = (NameEntryTableViewCell *) [self.entryTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
-        cell.profileImageView.image = self.selectedImage;
+        self.entryCell.profileImageView.image = self.selectedImage;
     }];
+}
+
+- (IBAction)onNextButtonTapped:(UIBarButtonItem *)sender
+{
+    if ([self.entryCell.firstNameTextField.text isEqualToString:@""] || [self.entryCell.lastNameTextField.text isEqualToString:@""] || self.entryCell.profileImageView.image == nil)
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Oops" message:@"Make sure you enter your name and pick a photo!" preferredStyle:UIAlertControllerStyleAlert];
+        [alert addAction:[UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil]];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    else
+    {
+        [self dismissViewControllerAnimated:YES completion:^{
+            [self createAndSaveProfile];
+        }];
+    }
+}
+
+-(void)createAndSaveProfile
+{
+    Profile *profile = [[Profile alloc] initWithUser:[User currentUser]];
+    profile.fullName = [NSString stringWithFormat:@"%@ %@", self.entryCell.firstNameTextField.text, self.entryCell.lastNameTextField.text];
+    [profile saveInBackground];
+
+    [[UniversalProfile sharedInstance] setProfile:profile];
 }
 
 @end

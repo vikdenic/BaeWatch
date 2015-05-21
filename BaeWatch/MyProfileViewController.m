@@ -28,7 +28,7 @@
 
 -(void)receiveNotification
 {
-    self.title = [UniversalProfile sharedInstance].profile.name;
+    self.title = [UniversalProfile sharedInstance].profile.fullName;
 }
 
 
@@ -46,7 +46,7 @@
 
 -(void)setProfileInfo
 {
-    self.title = [[UniversalProfile sharedInstance] profile].name;
+//    self.title = [[UniversalProfile sharedInstance] profile].fullName;
 }
 
 @end

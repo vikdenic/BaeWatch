@@ -19,6 +19,13 @@ NSString *const kSegueHomeToRegister = @"HomeToRegisterSegue";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    if ([User currentUser].fbId != nil)
+    {
+        [FBManager findFBFriendsWithBlock:^(NSArray *friends, NSError *error) {
+            NSLog(@"Friends are: %@", friends);
+        }];
+    }
 }
 
 -(void)viewDidAppear:(BOOL)animated
@@ -29,44 +36,6 @@ NSString *const kSegueHomeToRegister = @"HomeToRegisterSegue";
     {
         [self performSegueWithIdentifier:kSegueHomeToRegister sender:self];
     }
-    else
-    {
-        if ([User currentUser].fbId != nil)
-        {
-            [self findFBFriends];
-        }
-    }
-}
-
--(void)findFBFriends
-{
-    FBSDKGraphRequest *friendsRequest = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me/friends" parameters:nil];
-    FBSDKGraphRequestConnection *connection = [[FBSDKGraphRequestConnection alloc] init];
-    [connection addRequest:friendsRequest
-         completionHandler:^(FBSDKGraphRequestConnection *innerConnection, NSDictionary *result, NSError *error) {
-
-              NSArray *friendObjects = [result objectForKey:@"data"];
-              NSMutableArray *friendIds = [NSMutableArray arrayWithCapacity:friendObjects.count];
-              // Create a list of friends' Facebook IDs
-              for (NSDictionary *friendObject in friendObjects)
-              {
-                  [friendIds addObject:[friendObject objectForKey:@"id"]];
-              }
- 
-              // Construct a PFUser query that will find friends whose facebook ids
-              // are contained in the current user's friend list.
-              PFQuery *friendQuery = [User query];
-              [friendQuery whereKey:@"fbId" containedIn:friendIds];
- 
-              // findObjects will return a list of PFUsers that are friends
-              // with the current user
-              [friendQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                  
-                  NSLog(@"Friends are: %@", [objects objectAtIndex:0]);
-              }];
-         }];
-    // start the actual request
-    [connection start];
 }
 
 @end

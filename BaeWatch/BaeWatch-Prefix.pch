@@ -19,6 +19,7 @@
 //Model Classes
 #import "User.h"
 #import "Profile.h"
+#import "FBManager.h"
 
 //Facebook
 #import <FBSDKCoreKit/FBSDKCoreKit.h>

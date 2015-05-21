@@ -17,10 +17,10 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [Profile registerSubclass];
 
     [Parse setApplicationId:@"Y5tuRfbwpGIbfTrnDOSpaOSpQQ9HXuvPynaPFZ36"
                   clientKey:@"GdCcTlS08ICJ52fnLMzb6KsLKEBBYA4CiqoSafQz"];
-
 
     [PFFacebookUtils initializeFacebookWithApplicationLaunchOptions:launchOptions];
 
@@ -28,7 +28,7 @@
     {
         [self setProfileSingleton];
     }
-    
+
     return [[FBSDKApplicationDelegate sharedInstance] application:application
                                     didFinishLaunchingWithOptions:launchOptions];
 }
@@ -56,20 +56,18 @@
     [profileQuery includeKey:@"user"];
     [profileQuery whereKey:@"user" equalTo:[User currentUser]];
 
-    [profileQuery getFirstObjectInBackgroundWithBlock:^(PFObject *profile, NSError *error) {
-
-        Profile *currentProfile = (Profile *) profile;
-        [[UniversalProfile sharedInstance] setProfile:currentProfile];
+    [profileQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
+        Profile *profile = [objects firstObject];
+        [[UniversalProfile sharedInstance] setProfile:profile];
         [self setTabBar];
-        NSLog(@"Already logged in as: %@", currentProfile.name);
-    }];
+     }];
 }
 
 -(void)setTabBar
 {
     UITabBarController *tbc = (UITabBarController *)self.window.rootViewController;
     UITabBarItem *tabItem = [tbc.tabBar.items objectAtIndex:1];
-    [tabItem setTitle:[UniversalProfile sharedInstance].profile.name];
+    [tabItem setTitle:[UniversalProfile sharedInstance].profile.fullName];
 }
 
 @end

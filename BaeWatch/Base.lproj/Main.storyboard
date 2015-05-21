@@ -321,7 +321,8 @@
                                                             <exclude reference="Ch6-eM-5i6"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="widthClass=compact">
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="117" y="75" width="195" height="37"/>
                                                         <mask key="constraints">
                                                             <include reference="Ch6-eM-5i6"/>
                                                         </mask>
@@ -385,7 +386,8 @@
                                                             <exclude reference="9hM-bl-93e"/>
                                                         </mask>
                                                     </variation>
-                                                    <variation key="widthClass=compact">
+                                                    <variation key="widthClass=compact" misplaced="YES">
+                                                        <rect key="frame" x="117" y="37" width="195" height="37"/>
                                                         <mask key="constraints">
                                                             <include reference="9hM-bl-93e"/>
                                                         </mask>
@@ -412,16 +414,16 @@
                                                     <exclude reference="LTt-aA-19l"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <exclude reference="CXh-i3-Nts"/>
+                                                    <exclude reference="kEQ-ma-2oy"/>
+                                                    <exclude reference="O2n-PY-15f"/>
+                                                    <exclude reference="S0x-bX-xTz"/>
+                                                    <exclude reference="FBT-Ia-Avu"/>
+                                                    <exclude reference="nNF-ua-VWa"/>
                                                     <exclude reference="30k-ln-S10"/>
                                                     <exclude reference="QjO-xp-iiJ"/>
                                                     <exclude reference="XiV-gF-ayX"/>
                                                     <exclude reference="qb4-CQ-3vK"/>
-                                                    <exclude reference="CXh-i3-Nts"/>
-                                                    <exclude reference="kEQ-ma-2oy"/>
-                                                    <exclude reference="FBT-Ia-Avu"/>
-                                                    <exclude reference="nNF-ua-VWa"/>
-                                                    <exclude reference="O2n-PY-15f"/>
-                                                    <exclude reference="S0x-bX-xTz"/>
                                                 </mask>
                                             </variation>
                                             <variation key="widthClass=compact">
@@ -432,16 +434,16 @@
                                                     <include reference="LTt-aA-19l"/>
                                                 </mask>
                                                 <mask key="constraints">
+                                                    <include reference="CXh-i3-Nts"/>
+                                                    <include reference="kEQ-ma-2oy"/>
+                                                    <include reference="O2n-PY-15f"/>
+                                                    <include reference="S0x-bX-xTz"/>
+                                                    <include reference="FBT-Ia-Avu"/>
+                                                    <include reference="nNF-ua-VWa"/>
                                                     <include reference="30k-ln-S10"/>
                                                     <include reference="QjO-xp-iiJ"/>
                                                     <include reference="XiV-gF-ayX"/>
                                                     <include reference="qb4-CQ-3vK"/>
-                                                    <include reference="CXh-i3-Nts"/>
-                                                    <include reference="kEQ-ma-2oy"/>
-                                                    <include reference="FBT-Ia-Avu"/>
-                                                    <include reference="nNF-ua-VWa"/>
-                                                    <include reference="O2n-PY-15f"/>
-                                                    <include reference="S0x-bX-xTz"/>
                                                 </mask>
                                             </variation>
                                         </tableViewCellContentView>
@@ -491,7 +493,11 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Name &amp; Photo" id="Y3c-Ax-H4r">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="pDG-Is-TQl"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="pDG-Is-TQl">
+                            <connections>
+                                <action selector="onNextButtonTapped:" destination="jXQ-tS-ZNi" id="QQo-MW-U1K"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="entryTableView" destination="zIz-Cz-dPa" id="BvE-YH-kdp"/>

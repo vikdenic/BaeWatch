@@ -7,17 +7,13 @@
 //
 
 #import "Profile.h"
+#import <Parse/PFObject+Subclass.h>
 
 @implementation Profile
 
-@dynamic name;
+@dynamic fullName;
 @dynamic user;
 @dynamic profileImageFile;
-
-+(void)load
-{
-    [self registerSubclass];
-}
 
 +(NSString *)parseClassName
 {

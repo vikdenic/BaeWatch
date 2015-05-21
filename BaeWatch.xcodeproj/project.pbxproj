@@ -26,6 +26,7 @@
 		93A59C671B0989E000D2AB76 /* NameEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A59C661B0989E000D2AB76 /* NameEntryViewController.m */; };
 		93A59C6B1B098BAF00D2AB76 /* UITextField+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A59C6A1B098BAF00D2AB76 /* UITextField+Custom.m */; };
 		93A59C6F1B098CEF00D2AB76 /* NameEntryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A59C6E1B098CEF00D2AB76 /* NameEntryTableViewCell.m */; };
+		93E2D3431B0D8259007DAE45 /* FBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E2D3421B0D8259007DAE45 /* FBManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,8 @@
 		93A59C6A1B098BAF00D2AB76 /* UITextField+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Custom.m"; sourceTree = "<group>"; };
 		93A59C6D1B098CEF00D2AB76 /* NameEntryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameEntryTableViewCell.h; sourceTree = "<group>"; };
 		93A59C6E1B098CEF00D2AB76 /* NameEntryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameEntryTableViewCell.m; sourceTree = "<group>"; };
+		93E2D3411B0D8259007DAE45 /* FBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBManager.h; sourceTree = "<group>"; };
+		93E2D3421B0D8259007DAE45 /* FBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBManager.m; sourceTree = "<group>"; };
 		B9C9DBF197AEE655DFD74922 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -189,6 +192,8 @@
 				932AF8F71B079AC9007E859D /* Profile.m */,
 				932AF8F91B07ABA2007E859D /* UniversalProfile.h */,
 				932AF8FA1B07ABA2007E859D /* UniversalProfile.m */,
+				93E2D3411B0D8259007DAE45 /* FBManager.h */,
+				93E2D3421B0D8259007DAE45 /* FBManager.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -379,6 +384,7 @@
 				932AF8F81B079AC9007E859D /* Profile.m in Sources */,
 				932AF8EF1B06E214007E859D /* HomeViewController.m in Sources */,
 				932AF8941B06946A007E859D /* main.m in Sources */,
+				93E2D3431B0D8259007DAE45 /* FBManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

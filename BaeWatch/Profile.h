@@ -10,11 +10,10 @@
 
 @interface Profile : PFObject <PFSubclassing>
 
-@property NSString *name;
 @property User *user;
+@property NSString *fullName;
 @property PFFile *profileImageFile;
 
-+(void)load;
 +(NSString *)parseClassName;
 
 -(instancetype)initWithUser: (User *)user;
