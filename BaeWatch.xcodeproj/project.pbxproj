@@ -24,7 +24,6 @@
 		932AF9061B08F796007E859D /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 932AF9051B08F796007E859D /* SettingsViewController.m */; };
 		93A59C631B090D6A00D2AB76 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A59C621B090D6A00D2AB76 /* Constants.m */; };
 		93A59C671B0989E000D2AB76 /* NameEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A59C661B0989E000D2AB76 /* NameEntryViewController.m */; };
-		93A59C6B1B098BAF00D2AB76 /* UITextField+Custom.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A59C6A1B098BAF00D2AB76 /* UITextField+Custom.m */; };
 		93A59C6F1B098CEF00D2AB76 /* NameEntryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A59C6E1B098CEF00D2AB76 /* NameEntryTableViewCell.m */; };
 		93E2D3431B0D8259007DAE45 /* FBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E2D3421B0D8259007DAE45 /* FBManager.m */; };
 /* End PBXBuildFile section */
@@ -73,8 +72,6 @@
 		93A59C621B090D6A00D2AB76 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		93A59C651B0989E000D2AB76 /* NameEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameEntryViewController.h; sourceTree = "<group>"; };
 		93A59C661B0989E000D2AB76 /* NameEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameEntryViewController.m; sourceTree = "<group>"; };
-		93A59C691B098BAF00D2AB76 /* UITextField+Custom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Custom.h"; sourceTree = "<group>"; };
-		93A59C6A1B098BAF00D2AB76 /* UITextField+Custom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Custom.m"; sourceTree = "<group>"; };
 		93A59C6D1B098CEF00D2AB76 /* NameEntryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameEntryTableViewCell.h; sourceTree = "<group>"; };
 		93A59C6E1B098CEF00D2AB76 /* NameEntryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameEntryTableViewCell.m; sourceTree = "<group>"; };
 		93E2D3411B0D8259007DAE45 /* FBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBManager.h; sourceTree = "<group>"; };
@@ -203,8 +200,6 @@
 			children = (
 				93A59C611B090D6A00D2AB76 /* Constants.h */,
 				93A59C621B090D6A00D2AB76 /* Constants.m */,
-				93A59C691B098BAF00D2AB76 /* UITextField+Custom.h */,
-				93A59C6A1B098BAF00D2AB76 /* UITextField+Custom.m */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -371,7 +366,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93A59C6B1B098BAF00D2AB76 /* UITextField+Custom.m in Sources */,
 				932AF8EC1B06DDB2007E859D /* User.m in Sources */,
 				932AF8FB1B07ABA2007E859D /* UniversalProfile.m in Sources */,
 				93A59C6F1B098CEF00D2AB76 /* NameEntryTableViewCell.m in Sources */,

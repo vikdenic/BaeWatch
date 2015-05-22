@@ -14,9 +14,6 @@
 {
     // Initialization code
     [super awakeFromNib];
-    
-    [self.firstNameTextField addBottomBorder];
-    [self.lastNameTextField addBottomBorder];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
