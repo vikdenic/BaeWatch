@@ -12,4 +12,8 @@
 
 +(void)findFBFriendsWithBlock:(void (^)(NSArray *friends, NSError *error))completionHandler;
 
++(void)setUsersFbIdWithBlock:(void (^)(NSError *error))completionHandler;
+
++(void)retrieveFbUsersInfoAndCreateProfile;
+
 @end

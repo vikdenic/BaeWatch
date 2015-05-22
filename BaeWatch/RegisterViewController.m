@@ -24,6 +24,7 @@ NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
     [super viewDidLoad];
 }
 
+//Registers a user via basic Parse
 - (IBAction)onRegisterTapped:(UIButton *)sender
 {
     [User createUserWithUserName:self.usernameTextField.text withPassword:self.passwordTextField.text completion:^(BOOL result, NSError *error) {
@@ -32,11 +33,15 @@ NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
     }];
 }
 
+//Action when user taps the custom FB login button
 - (IBAction)onFBLoginTapped:(FBSDKLoginButton *)sender
 {
     [self _loginWithFacebook];
 }
 
+//Executes login or registration with Facebook
+//Asks for permissions to the user's info
+//Will log them in, create the account AND log them in, or tell you it was cancelled
 - (void)_loginWithFacebook
 {
     // Set permissions required from the facebook user account
@@ -48,11 +53,17 @@ NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
         {
             NSLog(@"Uh oh. The user cancelled the Facebook login.");
         }
-        else if (user.isNew) {
+        //When a new user is registered through Facebook
+        ////Set their unique fbid to the User class
+        ////Create a Profile for them, with their info from FB graph set
+        ////And set the share Profile singleton to this
+        else if (user.isNew)
+        {
             NSLog(@"User signed up and logged in through Facebook!");
-            [self setUsersFbId];
-            [self createAndSaveProfile];
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [FBManager setUsersFbIdWithBlock:^(NSError *error) {
+                [self createAndSaveProfile];
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }];
         }
         else
         {
@@ -70,74 +81,16 @@ NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
 
     [[UniversalProfile sharedInstance] setProfile:profile];
 
+    NSLog(@">>>> checking for fbid");
     if ([User currentUser].fbId != nil)
     {
-        [self _loadData];
+        [FBManager retrieveFbUsersInfoAndCreateProfile];
     }
 }
 
--(void)setUsersFbId
-{
-    FBSDKGraphRequest *friendsRequest = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
-    FBSDKGraphRequestConnection *connection = [[FBSDKGraphRequestConnection alloc] init];
-
-    [connection addRequest:friendsRequest
-         completionHandler:^(FBSDKGraphRequestConnection *innerConnection, NSDictionary *result, NSError *error) {
-
-         if (error == nil)
-         {
-             [User currentUser].fbId = [result objectForKey:@"id"];
-             [[User currentUser] saveInBackground];
-         }
-    }];
-
-    [connection start];
-}
-
-- (void)_loadData
-{
-    // ...
-    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:nil];
-
-    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-        if (!error)
-        {
-            // result is a dictionary with the user's Facebook data
-            NSDictionary *userData = (NSDictionary *)result;
-
-            NSString *facebookID = userData[@"id"];
-            NSString *name = userData[@"name"];
-//            NSString *location = userData[@"location"][@"name"];
-
-//            NSLog(@"%@ %@", facebookID, name);
-
-            Profile *currentProfile = [[UniversalProfile sharedInstance] profile];
-            currentProfile.fullName = name;
-
-
-            [currentProfile saveInBackground];
-
-            NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
-
-            NSURLRequest *urlRequest = [NSURLRequest requestWithURL:pictureURL];
-
-            // Now add the data to the UI elements
-            // Run network request asynchronously
-            [NSURLConnection sendAsynchronousRequest:urlRequest
-                                               queue:[NSOperationQueue mainQueue]
-                                   completionHandler:
-             ^(NSURLResponse *response, NSData *data, NSError *connectionError) {
-                 if (connectionError == nil && data != nil) {
-
-                     PFFile *file = [PFFile fileWithData:data];
-                     [currentProfile setProfileImageFile:file];
-                     [currentProfile saveInBackground];
-                 }
-             }];
-        }
-    }];
-}
-
+//Retrieves the current user's Profile
+//Sets the profile singleton
+//Sends out kNotificationNewUser, specifically to MyProfileViewController who then sets his title
 -(void)setProfileSingleton
 {
     PFQuery *profileQuery = [PFQuery queryWithClassName:@"Profile"];
@@ -149,7 +102,7 @@ NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
         Profile *currentProfile = (Profile *) profile;
         [[UniversalProfile sharedInstance] setProfile:currentProfile];
         [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNewUser object:self];
-        [self _loadData];
+        [FBManager retrieveFbUsersInfoAndCreateProfile];
     }];
 }
 
