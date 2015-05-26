@@ -14,25 +14,6 @@
 
 @implementation MyProfileViewController
 
--(id)initWithCoder:(NSCoder *)aDecoder
-
-{
-    self = [super initWithCoder:aDecoder];
-
-    if (self)
-    {
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receiveNotification) name:kNotificationNewUser object:nil];
-    }
-
-    return self;
-}
-
--(void)receiveNotification
-{
-    self.title = [UniversalProfile sharedInstance].profile.fullName;
-}
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -47,7 +28,7 @@
 
 -(void)setProfileInfo
 {
-//    self.title = [[UniversalProfile sharedInstance] profile].fullName;
+    [self.navigationItem setTitle:[[UniversalProfile sharedInstance] profile].fullName];
 }
 
 @end

@@ -16,4 +16,6 @@
 
 + (UniversalProfile *)sharedInstance;
 
++(void)retrieveCurrentProfileWithBlock:(void (^)())completionHandler;
+
 @end

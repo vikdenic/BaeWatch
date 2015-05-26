@@ -83,7 +83,6 @@
 
 
             [currentProfile saveInBackground];
-            [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNewUser object:self];
 
             NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
 

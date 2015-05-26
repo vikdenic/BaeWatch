@@ -12,12 +12,16 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (strong, nonatomic) IBOutlet UIButton *registerButton;
+@property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
 
 @end
 
 NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
 
 @implementation RegisterViewController
+- (IBAction)registerButton:(UIButton *)sender {
+}
 
 - (void)viewDidLoad
 {
@@ -27,18 +31,37 @@ NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
 //Registers a user via basic Parse
 - (IBAction)onRegisterTapped:(UIButton *)sender
 {
-    [User createUserWithUserName:self.usernameTextField.text withPassword:self.passwordTextField.text completion:^(BOOL result, NSError *error)
+    if (self.segmentedControl.selectedSegmentIndex == 0)
     {
-        if (error == nil)
-        {
-            [self createAndSaveProfile];
-            [self performSegueWithIdentifier:kSegueIDRegisterToNameEntry sender:self];
-        }
-        else
-        {
-            [VZAlert showAlertWithTitle:@"Oops" message:error.localizedDescription viewController:self];
-        }
-    }];
+        [User createUserWithUserName:self.usernameTextField.text withPassword:self.passwordTextField.text completion:^(BOOL result, NSError *error)
+         {
+             if (error == nil)
+             {
+                 [self createAndSaveProfile];
+                 [self performSegueWithIdentifier:kSegueIDRegisterToNameEntry sender:self];
+             }
+             else
+             {
+                 [VZAlert showAlertWithTitle:@"Oops" message:error.localizedDescription viewController:self];
+             }
+         }];
+    }
+    else
+    {
+        [User logInWithUsernameInBackground:self.usernameTextField.text password:self.passwordTextField.text block:^(PFUser *user, NSError *error)
+         {
+             if (error == nil)
+             {
+                 [self dismissViewControllerAnimated:YES completion:^{
+                     [self retrieveCurrentProfile];
+                }];
+             }
+             else
+             {
+                 [VZAlert showAlertWithTitle:@"Oops" message:error.localizedDescription viewController:self];
+             }
+         }];
+    }
 }
 
 //Action when user taps the custom FB login button
@@ -82,6 +105,18 @@ NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
     }];
 }
 
+- (IBAction)onSegmentTapped:(UISegmentedControl *)sender
+{
+    if (sender.selectedSegmentIndex == 0)
+    {
+        [self.registerButton setTitle:@"SIGN UP" forState:UIControlStateNormal];
+    }
+    else
+    {
+        [self.registerButton setTitle:@"LOG IN" forState:UIControlStateNormal];
+    }
+}
+
 -(void)createAndSaveProfile
 {
     Profile *profile = [[Profile alloc] initWithUser:[User currentUser]];
@@ -109,8 +144,19 @@ NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
 
         Profile *currentProfile = (Profile *) profile;
         [[UniversalProfile sharedInstance] setProfile:currentProfile];
-        [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNewUser object:self];
         [FBManager retrieveFbUsersInfoAndCreateProfile];
+    }];
+}
+
+-(void)retrieveCurrentProfile
+{
+    PFQuery *profileQuery = [PFQuery queryWithClassName:@"Profile"];
+    [profileQuery includeKey:@"user"];
+    [profileQuery whereKey:@"user" equalTo:[User currentUser]];
+
+    [profileQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
+        Profile *profile = [objects firstObject];
+        [[UniversalProfile sharedInstance] setProfile:profile];
     }];
 }
 

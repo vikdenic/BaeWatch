@@ -96,8 +96,6 @@ NSString *const kCellIDNameEntry =  @"NameEntryCell";
     [profile saveInBackground];
 
     [[UniversalProfile sharedInstance] setProfile:profile];
-
-    [[NSNotificationCenter defaultCenter] postNotificationName:kNotificationNewUser object:self];
 }
 
 @end
