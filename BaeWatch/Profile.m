@@ -14,6 +14,7 @@
 @dynamic fullName;
 @dynamic user;
 @dynamic profileImageFile;
+@dynamic phoneNumber;
 
 +(NSString *)parseClassName
 {

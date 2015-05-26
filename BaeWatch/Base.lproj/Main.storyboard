@@ -151,6 +151,9 @@
                                 <rect key="frame" x="199" y="214" width="203" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="kep-tc-ZCq"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HpM-rv-L89">
                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -230,6 +233,9 @@
                                         <include reference="YBj-U6-QaN"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="Opa-zV-i4k"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -599,7 +605,7 @@
             </objects>
             <point key="canvasLocation" x="3495" y="517"/>
         </scene>
-        <!--Phone Entry View Controller-->
+        <!--Find Friends!-->
         <scene sceneID="79p-5F-D5u">
             <objects>
                 <viewController id="uHK-Ae-2fM" customClass="PhoneEntryViewController" sceneMemberID="viewController">
@@ -614,7 +620,9 @@
                                 <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="75" id="Fuv-pm-GW9"/>
-                                    <constraint firstAttribute="width" constant="368" id="jYh-q8-aQW"/>
+                                    <constraint firstAttribute="width" constant="368" id="jYh-q8-aQW">
+                                        <variation key="widthClass=compact" constant="332"/>
+                                    </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
@@ -682,7 +690,9 @@
                                 <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="18" id="VcB-FD-Bn9"/>
-                                    <constraint firstAttribute="width" constant="350" id="cQb-cU-2HL"/>
+                                    <constraint firstAttribute="width" constant="350" id="cQb-cU-2HL">
+                                        <variation key="widthClass=compact" constant="332"/>
+                                    </constraint>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
@@ -749,6 +759,16 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="Find Friends!" id="zJc-0y-PGz">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="m2w-vH-JkY">
+                            <connections>
+                                <action selector="onDoneButtonTapped:" destination="uHK-Ae-2fM" id="KcL-2n-7Y8"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="phoneTextField" destination="m8I-As-EvR" id="P2u-GY-Z9H"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hlI-EA-Gb5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

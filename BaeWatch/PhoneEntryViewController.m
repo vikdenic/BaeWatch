@@ -7,8 +7,10 @@
 //
 
 #import "PhoneEntryViewController.h"
+#import <AddressBook/AddressBook.h>
 
 @interface PhoneEntryViewController () <UITextFieldDelegate>
+@property (strong, nonatomic) IBOutlet UITextField *phoneTextField;
 
 @end
 
@@ -17,6 +19,83 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self.navigationItem setHidesBackButton:YES];
+
+    [self addressBook];
+}
+
+- (IBAction)onDoneButtonTapped:(UIBarButtonItem *)sender
+{
+    if (self.phoneTextField.text.length == 14)
+    {
+        Profile *currentProfile = [[UniversalProfile sharedInstance] profile];
+        [currentProfile setPhoneNumber:self.phoneTextField.text];
+        [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (error == nil)
+            {
+                [self dismissViewControllerAnimated:YES completion:nil];
+            }
+            else
+            {
+                [VZAlert showAlertWithTitle:@"Oops" message:error.localizedDescription viewController:self];
+            }
+        }];
+    }
+    else
+    {
+        [VZAlert showAlertWithTitle:@"Oops" message:@"Please enter your full phone number, beginning with the area code" viewController:self];
+    }
+}
+
+-(void)addressBook
+{
+    CFErrorRef error = NULL;
+    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
+
+    ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
+        if (!granted){
+            //4
+            NSLog(@"Just denied");
+            return;
+        }
+        //5
+        NSLog(@"Just authorized");
+        [self listPeopleInAddressBook:addressBook];
+    });
+}
+
+- (void)listPeopleInAddressBook:(ABAddressBookRef)addressBook
+{
+    NSArray *allPeople = CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(addressBook));
+    NSInteger numberOfPeople = [allPeople count];
+
+    for (NSInteger i = 0; i < numberOfPeople; i++) {
+        ABRecordRef person = (__bridge ABRecordRef)allPeople[i];
+
+//        NSString *firstName = CFBridgingRelease(ABRecordCopyValue(person, kABPersonFirstNameProperty));
+//        NSString *lastName  = CFBridgingRelease(ABRecordCopyValue(person, kABPersonLastNameProperty));
+//        NSLog(@"Name:%@ %@", firstName, lastName);
+
+        ABMultiValueRef phoneNumbers = ABRecordCopyValue(person, kABPersonPhoneProperty);
+
+        CFIndex numberOfPhoneNumbers = ABMultiValueGetCount(phoneNumbers);
+        for (CFIndex i = 0; i < numberOfPhoneNumbers; i++)
+        {
+            NSString *phoneNumber = CFBridgingRelease(ABMultiValueCopyValueAtIndex(phoneNumbers, i));
+            NSString *trimmedNumber = [[phoneNumber componentsSeparatedByCharactersInSet:
+                                    [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
+                                   componentsJoinedByString:@""];
+            if ([trimmedNumber hasPrefix:@"1"] && [trimmedNumber length] > 1)
+            {
+                trimmedNumber = [trimmedNumber substringFromIndex:1];
+            }
+            NSLog(@"  phone:%@", trimmedNumber);
+        }
+
+        CFRelease(phoneNumbers);
+
+        NSLog(@"=============================================");
+    }
 }
 
 #pragma mark - textfield delegate

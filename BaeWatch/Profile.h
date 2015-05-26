@@ -13,6 +13,7 @@
 @property User *user;
 @property NSString *fullName;
 @property PFFile *profileImageFile;
+@property NSString *phoneNumber;
 
 +(NSString *)parseClassName;
 

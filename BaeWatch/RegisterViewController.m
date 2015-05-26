@@ -8,12 +8,13 @@
 
 #import "RegisterViewController.h"
 
-@interface RegisterViewController ()
+@interface RegisterViewController () <UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *usernameTextField;
 @property (strong, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (strong, nonatomic) IBOutlet UIButton *registerButton;
 @property (strong, nonatomic) IBOutlet UISegmentedControl *segmentedControl;
+@property CGPoint originalCenter;
 
 @end
 
@@ -24,6 +25,7 @@ NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.originalCenter = self.view.center;
 }
 
 //Registers a user via basic Parse
@@ -150,6 +152,23 @@ NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
         {
             [VZAlert showAlertWithTitle:@"Oops" message:error.localizedDescription viewController:self];
         }
+    }];
+}
+
+#pragma mark - textfield
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        self.view.center = CGPointMake(self.originalCenter.x, self.originalCenter.y - 140);
+    }];
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.view endEditing:YES];
+
+    [UIView animateWithDuration:0.3 animations:^{
+        self.view.center = self.originalCenter;
     }];
 }
 
