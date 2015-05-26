@@ -24,6 +24,7 @@
 {
     self = [super init];
     self.user = user;
+    self.fullName = @"Your Name";
 
     return self;
 }

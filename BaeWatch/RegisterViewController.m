@@ -27,9 +27,17 @@ NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
 //Registers a user via basic Parse
 - (IBAction)onRegisterTapped:(UIButton *)sender
 {
-    [User createUserWithUserName:self.usernameTextField.text withPassword:self.passwordTextField.text completion:^(BOOL result, NSError *error) {
-        [self createAndSaveProfile];
-        [self performSegueWithIdentifier:kSegueIDRegisterToNameEntry sender:self];
+    [User createUserWithUserName:self.usernameTextField.text withPassword:self.passwordTextField.text completion:^(BOOL result, NSError *error)
+    {
+        if (error == nil)
+        {
+            [self createAndSaveProfile];
+            [self performSegueWithIdentifier:kSegueIDRegisterToNameEntry sender:self];
+        }
+        else
+        {
+            [VZAlert showAlertWithTitle:@"Oops" message:error.localizedDescription viewController:self];
+        }
     }];
 }
 

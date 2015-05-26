@@ -31,5 +31,6 @@
 
 //Utilities
 #import "Constants.h"
+#import "VZAlert.h"
 
 #endif

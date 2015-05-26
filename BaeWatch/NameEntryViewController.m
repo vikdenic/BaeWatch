@@ -86,8 +86,13 @@ NSString *const kCellIDNameEntry =  @"NameEntryCell";
 
 -(void)createAndSaveProfile
 {
-    Profile *profile = [[Profile alloc] initWithUser:[User currentUser]];
-    profile.fullName = [NSString stringWithFormat:@"%@ %@", self.entryCell.firstNameTextField.text, self.entryCell.lastNameTextField.text];
+    Profile *profile = [[UniversalProfile sharedInstance] profile];
+
+    [profile setFullName:[NSString stringWithFormat:@"%@ %@", self.entryCell.firstNameTextField.text, self.entryCell.lastNameTextField.text]];
+
+    PFFile *imagefile = [PFFile fileWithData:UIImagePNGRepresentation(self.selectedImage)];
+    [profile setProfileImageFile:imagefile];
+    
     [profile saveInBackground];
 
     [[UniversalProfile sharedInstance] setProfile:profile];
