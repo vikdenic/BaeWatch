@@ -59,15 +59,7 @@
     [profileQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
         Profile *profile = [objects firstObject];
         [[UniversalProfile sharedInstance] setProfile:profile];
-//        [self setTabBar];
      }];
 }
-
-//-(void)setTabBar
-//{
-//    UITabBarController *tbc = (UITabBarController *)self.window.rootViewController;
-//    UITabBarItem *tabItem = [tbc.tabBar.items objectAtIndex:1];
-//    [tabItem setTitle:[UniversalProfile sharedInstance].profile.fullName];
-//}
 
 @end

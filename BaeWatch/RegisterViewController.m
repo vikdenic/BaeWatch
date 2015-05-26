@@ -53,7 +53,7 @@ NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
              if (error == nil)
              {
                  [self dismissViewControllerAnimated:YES completion:^{
-                     [self retrieveCurrentProfile];
+                     [self setProfileSingleton];
                 }];
              }
              else
@@ -80,27 +80,34 @@ NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
 
     // Login PFUser using Facebook
     [PFFacebookUtils logInInBackgroundWithReadPermissions:permissionsArray block:^(PFUser *user, NSError *error) {
-        if (!user)
+        if (error == nil)
         {
-            NSLog(@"Uh oh. The user cancelled the Facebook login.");
-        }
-        //When a new user is registered through Facebook
-        ////Set their unique fbid to the User class
-        ////Create a Profile for them, with their info from FB graph set
-        ////And set the share Profile singleton to this
-        else if (user.isNew)
-        {
-            NSLog(@"User signed up and logged in through Facebook!");
-            [FBManager setUsersFbIdWithBlock:^(NSError *error) {
-                [self createAndSaveProfile];
+            if (!user)
+            {
+                NSLog(@"Uh oh. The user cancelled the Facebook login.");
+            }
+            //When a new user is registered through Facebook
+            ////Set their unique fbid to the User class
+            ////Create a Profile for them, with their info from FB graph set
+            ////And set the share Profile singleton to this
+            else if (user.isNew)
+            {
+                NSLog(@"User signed up and logged in through Facebook!");
+                [FBManager setUsersFbIdWithBlock:^(NSError *error) {
+                    [self createAndSaveProfile];
+                    [self dismissViewControllerAnimated:YES completion:nil];
+                }];
+            }
+            else
+            {
+                NSLog(@"User logged in through Facebook!");
+                [self setProfileSingleton];
                 [self dismissViewControllerAnimated:YES completion:nil];
-            }];
+            }
         }
         else
         {
-            NSLog(@"User logged in through Facebook!");
-            [self setProfileSingleton];
-            [self dismissViewControllerAnimated:YES completion:nil];
+            [VZAlert showAlertWithTitle:@"Oops" message:error.localizedDescription viewController:self];
         }
     }];
 }
@@ -117,6 +124,8 @@ NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
     }
 }
 
+//Creates a new Profile object that will point to the current user
+//If via FB, will make a graph request to get their name and profile pic
 -(void)createAndSaveProfile
 {
     Profile *profile = [[Profile alloc] initWithUser:[User currentUser]];
@@ -124,7 +133,6 @@ NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
 
     [[UniversalProfile sharedInstance] setProfile:profile];
 
-    NSLog(@">>>> checking for fbid");
     if ([User currentUser].fbId != nil)
     {
         [FBManager retrieveFbUsersInfoAndCreateProfile];
@@ -133,7 +141,6 @@ NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
 
 //Retrieves the current user's Profile
 //Sets the profile singleton
-//Sends out kNotificationNewUser, specifically to MyProfileViewController who then sets his title
 -(void)setProfileSingleton
 {
     PFQuery *profileQuery = [PFQuery queryWithClassName:@"Profile"];
@@ -144,19 +151,6 @@ NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
 
         Profile *currentProfile = (Profile *) profile;
         [[UniversalProfile sharedInstance] setProfile:currentProfile];
-        [FBManager retrieveFbUsersInfoAndCreateProfile];
-    }];
-}
-
--(void)retrieveCurrentProfile
-{
-    PFQuery *profileQuery = [PFQuery queryWithClassName:@"Profile"];
-    [profileQuery includeKey:@"user"];
-    [profileQuery whereKey:@"user" equalTo:[User currentUser]];
-
-    [profileQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error){
-        Profile *profile = [objects firstObject];
-        [[UniversalProfile sharedInstance] setProfile:profile];
     }];
 }
 
