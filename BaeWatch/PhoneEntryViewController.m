@@ -29,7 +29,16 @@
     if (self.phoneTextField.text.length == 14)
     {
         Profile *currentProfile = [[UniversalProfile sharedInstance] profile];
-        [currentProfile setPhoneNumber:self.phoneTextField.text];
+        
+        NSString *usersNumber = [[self.phoneTextField.text componentsSeparatedByCharactersInSet:
+                                    [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
+                                   componentsJoinedByString:@""];
+        if ([usersNumber hasPrefix:@"1"] && [usersNumber length] > 1)
+        {
+            usersNumber = [usersNumber substringFromIndex:1];
+        }
+        [currentProfile setPhoneNumber:usersNumber];
+
         [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (error == nil)
             {
