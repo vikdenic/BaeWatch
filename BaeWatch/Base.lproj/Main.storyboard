@@ -322,7 +322,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3384" y="517"/>
+            <point key="canvasLocation" x="2772" y="517"/>
         </scene>
         <!--Name & Photo-->
         <scene sceneID="sfv-On-QaL">
@@ -592,11 +592,164 @@
                     </navigationItem>
                     <connections>
                         <outlet property="entryTableView" destination="zIz-Cz-dPa" id="BvE-YH-kdp"/>
+                        <segue destination="uHK-Ae-2fM" kind="show" identifier="InfoEntryToPhoneEntrySegue" id="l4d-iG-Xur"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8nj-W6-IkN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4113" y="517"/>
+            <point key="canvasLocation" x="3495" y="517"/>
+        </scene>
+        <!--Phone Entry View Controller-->
+        <scene sceneID="79p-5F-D5u">
+            <objects>
+                <viewController id="uHK-Ae-2fM" customClass="PhoneEntryViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jAL-Pn-H6i"/>
+                        <viewControllerLayoutGuide type="bottom" id="yXa-jl-tfP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="701-Wj-o7k">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="1-(555)-867-5309" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="m8I-As-EvR">
+                                <rect key="frame" x="0.0" y="-30" width="97" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="Fuv-pm-GW9"/>
+                                    <constraint firstAttribute="width" constant="368" id="jYh-q8-aQW"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Fuv-pm-GW9"/>
+                                        <exclude reference="jYh-q8-aQW"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="Fuv-pm-GW9"/>
+                                        <include reference="jYh-q8-aQW"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Easily find your friends!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8KV-Df-JMv">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="27" id="5b9-qC-UUu"/>
+                                    <constraint firstAttribute="width" constant="223" id="oKE-xo-Mgs"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" red="0.94117647059999998" green="0.41176470590000003" blue="0.094117647060000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="5b9-qC-UUu"/>
+                                        <exclude reference="oKE-xo-Mgs"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="5b9-qC-UUu"/>
+                                        <include reference="oKE-xo-Mgs"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your number will ONLY be used to find contacts." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BEK-SE-20a">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="332" id="fy1-Zb-cq8"/>
+                                    <constraint firstAttribute="height" constant="18" id="p14-mM-o7D"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="fy1-Zb-cq8"/>
+                                        <exclude reference="p14-mM-o7D"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="fy1-Zb-cq8"/>
+                                        <include reference="p14-mM-o7D"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="It will not be used or shared for any other purposes" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LWT-BL-19y">
+                                <rect key="frame" x="0.0" y="-21" width="42" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="VcB-FD-Bn9"/>
+                                    <constraint firstAttribute="width" constant="350" id="cQb-cU-2HL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
+                                <nil key="highlightedColor"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="VcB-FD-Bn9"/>
+                                        <exclude reference="cQb-cU-2HL"/>
+                                    </mask>
+                                </variation>
+                                <variation key="widthClass=compact">
+                                    <mask key="constraints">
+                                        <include reference="VcB-FD-Bn9"/>
+                                        <include reference="cQb-cU-2HL"/>
+                                    </mask>
+                                </variation>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="LWT-BL-19y" secondAttribute="centerX" id="AiO-4V-gGW"/>
+                            <constraint firstItem="m8I-As-EvR" firstAttribute="centerX" secondItem="BEK-SE-20a" secondAttribute="centerX" id="ClJ-J1-MXz"/>
+                            <constraint firstItem="m8I-As-EvR" firstAttribute="centerX" secondItem="8KV-Df-JMv" secondAttribute="centerX" constant="-0.5" id="OUr-K8-qWr"/>
+                            <constraint firstItem="LWT-BL-19y" firstAttribute="centerX" secondItem="BEK-SE-20a" secondAttribute="centerX" id="hty-9F-hbf"/>
+                            <constraint firstAttribute="centerY" secondItem="LWT-BL-19y" secondAttribute="centerY" id="rnL-Tm-yxM"/>
+                            <constraint firstItem="BEK-SE-20a" firstAttribute="top" secondItem="m8I-As-EvR" secondAttribute="bottom" constant="15" id="vc2-ao-rdp"/>
+                            <constraint firstItem="LWT-BL-19y" firstAttribute="top" secondItem="BEK-SE-20a" secondAttribute="bottom" constant="15" id="yIa-oh-adK"/>
+                            <constraint firstItem="m8I-As-EvR" firstAttribute="top" secondItem="8KV-Df-JMv" secondAttribute="bottom" constant="15" id="yeJ-U1-9JF"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="m8I-As-EvR"/>
+                                <exclude reference="8KV-Df-JMv"/>
+                                <exclude reference="BEK-SE-20a"/>
+                                <exclude reference="LWT-BL-19y"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="ClJ-J1-MXz"/>
+                                <exclude reference="OUr-K8-qWr"/>
+                                <exclude reference="yeJ-U1-9JF"/>
+                                <exclude reference="vc2-ao-rdp"/>
+                                <exclude reference="AiO-4V-gGW"/>
+                                <exclude reference="hty-9F-hbf"/>
+                                <exclude reference="rnL-Tm-yxM"/>
+                                <exclude reference="yIa-oh-adK"/>
+                            </mask>
+                        </variation>
+                        <variation key="widthClass=compact">
+                            <mask key="subviews">
+                                <include reference="m8I-As-EvR"/>
+                                <include reference="8KV-Df-JMv"/>
+                                <include reference="BEK-SE-20a"/>
+                                <include reference="LWT-BL-19y"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="ClJ-J1-MXz"/>
+                                <include reference="OUr-K8-qWr"/>
+                                <include reference="yeJ-U1-9JF"/>
+                                <include reference="vc2-ao-rdp"/>
+                                <include reference="AiO-4V-gGW"/>
+                                <include reference="hty-9F-hbf"/>
+                                <include reference="rnL-Tm-yxM"/>
+                                <include reference="yIa-oh-adK"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hlI-EA-Gb5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4213.5" y="517"/>
         </scene>
         <!--Home-->
         <scene sceneID="IDG-TR-UQT">

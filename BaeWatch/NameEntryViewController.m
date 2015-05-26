@@ -20,6 +20,9 @@
 @implementation NameEntryViewController
 
 NSString *const kCellIDNameEntry =  @"NameEntryCell";
+NSString *const kSegueInfoEntryToPhoneEntry = @"InfoEntryToPhoneEntrySegue";
+
+#pragma mark - view lifecycle
 
 - (void)viewDidLoad
 {
@@ -27,11 +30,14 @@ NSString *const kCellIDNameEntry =  @"NameEntryCell";
     [self.navigationItem setHidesBackButton:YES];
 }
 
+//This sets the property entryCell which needs to be accessed from other methods
 -(void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     self.entryCell = (NameEntryTableViewCell *) [self.entryTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
 }
+
+#pragma mark - tableview
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -50,24 +56,7 @@ NSString *const kCellIDNameEntry =  @"NameEntryCell";
     return 150;
 }
 
--(void)nameEntryCell:(id)cell didTapEditButton:(UIButton *)button
-{
-    UIImagePickerController *imagePicker = [UIImagePickerController new];
-    imagePicker.allowsEditing = YES;
-    imagePicker.delegate = self;
-
-    [self presentViewController:imagePicker animated:YES completion:nil];
-}
-
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    [self dismissViewControllerAnimated:YES completion:^{
-
-        self.selectedImage = info[UIImagePickerControllerEditedImage];
-        self.entryCell.profileImageView.image = self.selectedImage;
-    }];
-}
-
+#pragma mark - actions
 - (IBAction)onNextButtonTapped:(UIBarButtonItem *)sender
 {
     if ([self.entryCell.firstNameTextField.text isEqualToString:@""] || [self.entryCell.lastNameTextField.text isEqualToString:@""] || self.entryCell.profileImageView.image == nil)
@@ -84,6 +73,27 @@ NSString *const kCellIDNameEntry =  @"NameEntryCell";
     }
 }
 
+#pragma mark - name entry cell delegate
+-(void)nameEntryCell:(id)cell didTapEditButton:(UIButton *)button
+{
+    UIImagePickerController *imagePicker = [UIImagePickerController new];
+    imagePicker.allowsEditing = YES;
+    imagePicker.delegate = self;
+
+    [self presentViewController:imagePicker animated:YES completion:nil];
+}
+
+#pragma mark - imagepicker
+-(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
+{
+    [self dismissViewControllerAnimated:YES completion:^{
+
+        self.selectedImage = info[UIImagePickerControllerEditedImage];
+        self.entryCell.profileImageView.image = self.selectedImage;
+    }];
+}
+
+#pragma mark - helpers
 -(void)updateProfileInfo
 {
     Profile *profile = [[UniversalProfile sharedInstance] profile];

@@ -26,6 +26,7 @@
 		93A59C671B0989E000D2AB76 /* NameEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A59C661B0989E000D2AB76 /* NameEntryViewController.m */; };
 		93A59C6F1B098CEF00D2AB76 /* NameEntryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A59C6E1B098CEF00D2AB76 /* NameEntryTableViewCell.m */; };
 		93D8928F1B14075C0045C02B /* VZAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D8928E1B14075C0045C02B /* VZAlert.m */; };
+		93D892921B14F95D0045C02B /* PhoneEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D892911B14F95D0045C02B /* PhoneEntryViewController.m */; };
 		93E2D3431B0D8259007DAE45 /* FBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 93E2D3421B0D8259007DAE45 /* FBManager.m */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +78,8 @@
 		93A59C6E1B098CEF00D2AB76 /* NameEntryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameEntryTableViewCell.m; sourceTree = "<group>"; };
 		93D8928D1B14075C0045C02B /* VZAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VZAlert.h; sourceTree = "<group>"; };
 		93D8928E1B14075C0045C02B /* VZAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VZAlert.m; sourceTree = "<group>"; };
+		93D892901B14F95D0045C02B /* PhoneEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneEntryViewController.h; sourceTree = "<group>"; };
+		93D892911B14F95D0045C02B /* PhoneEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PhoneEntryViewController.m; sourceTree = "<group>"; };
 		93E2D3411B0D8259007DAE45 /* FBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBManager.h; sourceTree = "<group>"; };
 		93E2D3421B0D8259007DAE45 /* FBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBManager.m; sourceTree = "<group>"; };
 		B9C9DBF197AEE655DFD74922 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -179,6 +182,8 @@
 				932AF9051B08F796007E859D /* SettingsViewController.m */,
 				93A59C651B0989E000D2AB76 /* NameEntryViewController.h */,
 				93A59C661B0989E000D2AB76 /* NameEntryViewController.m */,
+				93D892901B14F95D0045C02B /* PhoneEntryViewController.h */,
+				93D892911B14F95D0045C02B /* PhoneEntryViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -372,6 +377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				932AF8EC1B06DDB2007E859D /* User.m in Sources */,
+				93D892921B14F95D0045C02B /* PhoneEntryViewController.m in Sources */,
 				932AF8FB1B07ABA2007E859D /* UniversalProfile.m in Sources */,
 				93D8928F1B14075C0045C02B /* VZAlert.m in Sources */,
 				93A59C6F1B098CEF00D2AB76 /* NameEntryTableViewCell.m in Sources */,
