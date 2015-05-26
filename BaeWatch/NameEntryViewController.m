@@ -67,9 +67,8 @@ NSString *const kSegueInfoEntryToPhoneEntry = @"InfoEntryToPhoneEntrySegue";
     }
     else
     {
-        [self dismissViewControllerAnimated:YES completion:^{
-            [self updateProfileInfo];
-        }];
+        [self performSegueWithIdentifier:kSegueInfoEntryToPhoneEntry sender:self];
+        [self updateProfileInfo];
     }
 }
 
