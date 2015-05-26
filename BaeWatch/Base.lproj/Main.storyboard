@@ -145,7 +145,6 @@
                                 </state>
                                 <connections>
                                     <action selector="onRegisterTapped:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Wkf-mR-ku3"/>
-                                    <action selector="registerButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="cc3-I5-rgX"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" placeholder="password" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A2c-xV-egV">
