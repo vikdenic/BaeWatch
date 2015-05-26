@@ -79,12 +79,12 @@ NSString *const kCellIDNameEntry =  @"NameEntryCell";
     else
     {
         [self dismissViewControllerAnimated:YES completion:^{
-            [self createAndSaveProfile];
+            [self updateProfileInfo];
         }];
     }
 }
 
--(void)createAndSaveProfile
+-(void)updateProfileInfo
 {
     Profile *profile = [[UniversalProfile sharedInstance] profile];
 

@@ -261,10 +261,10 @@
                                 <exclude reference="78N-7e-Uxd"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="Blg-Vw-nMZ"/>
-                                <exclude reference="4sM-g4-AJn"/>
                                 <exclude reference="WgQ-gs-Ko5"/>
                                 <exclude reference="ppq-z3-XhX"/>
+                                <exclude reference="Blg-Vw-nMZ"/>
+                                <exclude reference="4sM-g4-AJn"/>
                                 <exclude reference="Ho8-bk-6gb"/>
                                 <exclude reference="M8j-OY-zO0"/>
                                 <exclude reference="Zeh-Fu-odU"/>
@@ -289,10 +289,10 @@
                                 <include reference="78N-7e-Uxd"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="Blg-Vw-nMZ"/>
-                                <include reference="4sM-g4-AJn"/>
                                 <include reference="WgQ-gs-Ko5"/>
                                 <include reference="ppq-z3-XhX"/>
+                                <include reference="Blg-Vw-nMZ"/>
+                                <include reference="4sM-g4-AJn"/>
                                 <include reference="Ho8-bk-6gb"/>
                                 <include reference="M8j-OY-zO0"/>
                                 <include reference="Zeh-Fu-odU"/>
