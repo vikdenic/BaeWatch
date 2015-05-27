@@ -19,6 +19,7 @@
 @end
 
 NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
+NSString *const kSegueIDRegisterToPhoneEntry = @"RegisterToPhoneEntrySegue";
 
 @implementation RegisterViewController
 
@@ -142,8 +143,8 @@ NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
                     [FBManager findFBFriendsWithBlock:^(NSArray *friends, NSError *error) {
                         [FBManager createFollowsFromFBFriends:friends];
                     }];
-                    
-                    [self dismissViewControllerAnimated:YES completion:nil];
+
+                    [self performSegueWithIdentifier:kSegueIDRegisterToPhoneEntry sender:self];
                 }];
             }
             else
