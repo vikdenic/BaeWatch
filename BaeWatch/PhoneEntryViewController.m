@@ -69,25 +69,26 @@
         }
         //5
         NSLog(@"Just authorized");
-        [self listPeopleInAddressBook:addressBook];
+        [self listPeopleInAddressBook:addressBook withCompletion:^(NSArray *numbers) {
+            [self createFollowsFromNumbers:numbers];
+        }];
     });
 }
 
-- (void)listPeopleInAddressBook:(ABAddressBookRef)addressBook
+- (void)listPeopleInAddressBook:(ABAddressBookRef)addressBook withCompletion:(void (^)(NSArray *numbers))completionHandler
 {
+    NSMutableArray *numbersArray = [NSMutableArray new];
+
     NSArray *allPeople = CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(addressBook));
     NSInteger numberOfPeople = [allPeople count];
 
     for (NSInteger i = 0; i < numberOfPeople; i++) {
         ABRecordRef person = (__bridge ABRecordRef)allPeople[i];
 
-//        NSString *firstName = CFBridgingRelease(ABRecordCopyValue(person, kABPersonFirstNameProperty));
-//        NSString *lastName  = CFBridgingRelease(ABRecordCopyValue(person, kABPersonLastNameProperty));
-//        NSLog(@"Name:%@ %@", firstName, lastName);
-
         ABMultiValueRef phoneNumbers = ABRecordCopyValue(person, kABPersonPhoneProperty);
 
         CFIndex numberOfPhoneNumbers = ABMultiValueGetCount(phoneNumbers);
+
         for (CFIndex i = 0; i < numberOfPhoneNumbers; i++)
         {
             NSString *phoneNumber = CFBridgingRelease(ABMultiValueCopyValueAtIndex(phoneNumbers, i));
@@ -98,13 +99,30 @@
             {
                 trimmedNumber = [trimmedNumber substringFromIndex:1];
             }
-            NSLog(@"  phone:%@", trimmedNumber);
+            [numbersArray addObject:trimmedNumber];
         }
-
         CFRelease(phoneNumbers);
-
-        NSLog(@"=============================================");
     }
+    completionHandler(numbersArray);
+}
+
+-(void)createFollowsFromNumbers:(NSArray *)numbers
+{
+    // Using PFQuery
+    PFQuery *profileQuery = [PFQuery queryWithClassName:@"Profile"];
+    [profileQuery includeKey:@"user"];
+
+    [profileQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+
+        for (Profile *profile in objects)
+        {
+            if ([numbers containsObject:profile.phoneNumber])
+            {
+                Activity *newFollow = [[Activity alloc] initFromUser:[UniversalProfile sharedInstance].profile toUser:profile type:kActivityTypeFollow];
+                [newFollow saveInBackground];
+            }
+        }
+    }];
 }
 
 #pragma mark - textfield delegate
