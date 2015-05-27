@@ -9,6 +9,9 @@
 #import "MyProfileViewController.h"
 
 @interface MyProfileViewController ()
+@property (strong, nonatomic) IBOutlet UIButton *followersButton;
+@property (strong, nonatomic) IBOutlet PFImageView *profilePicImageView;
+@property (strong, nonatomic) IBOutlet UIButton *followingButton;
 
 @end
 
@@ -28,7 +31,10 @@
 
 -(void)setProfileInfo
 {
-    [self.navigationItem setTitle:[[UniversalProfile sharedInstance] profile].fullName];
+    Profile *profile = [[UniversalProfile sharedInstance] profile];
+    [self.navigationItem setTitle:profile.fullName];
+    [self.profilePicImageView setFile:profile.profileImageFile];
+    [self.profilePicImageView loadInBackground];
 }
 
 @end

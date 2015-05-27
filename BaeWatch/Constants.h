@@ -12,4 +12,8 @@
 
 extern NSString *const kNotificationNewUser;
 
+extern NSString *const kActivityTypeFollow;
+extern NSString *const kActivityTypeBae;
+extern NSString *const kActivityTypeSwoonRequest;
+
 @end

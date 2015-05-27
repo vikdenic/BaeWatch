@@ -29,7 +29,7 @@
     if (self.phoneTextField.text.length == 14)
     {
         Profile *currentProfile = [[UniversalProfile sharedInstance] profile];
-        
+
         NSString *usersNumber = [[self.phoneTextField.text componentsSeparatedByCharactersInSet:
                                     [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
                                    componentsJoinedByString:@""];
