@@ -11,8 +11,8 @@
 
 @implementation Activity
 
-@dynamic fromUser;
-@dynamic toUser;
+@dynamic fromProfile;
+@dynamic toProfile;
 @dynamic type;
 
 +(NSString *)parseClassName
@@ -20,11 +20,11 @@
     return @"Activity";
 }
 
--(instancetype)initFromUser: (User *)fromUser toUser:(User *)toUser type:(NSString *)type
+-(instancetype)initFromUser: (Profile *)fromProfile toUser:(Profile *)toProfile type:(NSString *)type
 {
     self = [super init];
-    self.fromUser = fromUser;
-    self.toUser = toUser;
+    self.fromProfile = fromProfile;
+    self.toProfile = toProfile;
     self.type = type;
 
     return self;

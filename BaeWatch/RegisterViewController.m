@@ -138,6 +138,11 @@ NSString *const kSegueIDRegisterToNameEntry = @"RegisterToNameEntrySegue";
                 NSLog(@"User signed up and logged in through Facebook!");
                 [FBManager setUsersFbIdWithBlock:^(NSError *error) {
                     [self createAndSaveProfile];
+
+                    [FBManager findFBFriendsWithBlock:^(NSArray *friends, NSError *error) {
+                        [FBManager createFollowsFromFBFriends:friends];
+                    }];
+                    
                     [self dismissViewControllerAnimated:YES completion:nil];
                 }];
             }

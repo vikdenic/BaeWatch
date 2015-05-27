@@ -19,6 +19,7 @@
 //Model Classes
 #import "User.h"
 #import "Profile.h"
+#import "Activity.h"
 #import "FBManager.h"
 
 //Facebook

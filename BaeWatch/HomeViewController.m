@@ -19,13 +19,6 @@ NSString *const kSegueHomeToRegister = @"HomeToRegisterSegue";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    if ([User currentUser].fbId != nil)
-    {
-        [FBManager findFBFriendsWithBlock:^(NSArray *friends, NSError *error) {
-            NSLog(@"Friends are: %@", friends);
-        }];
-    }
 }
 
 -(void)viewDidAppear:(BOOL)animated

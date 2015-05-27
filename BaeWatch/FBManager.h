@@ -16,4 +16,6 @@
 
 +(void)retrieveFbUsersInfoAndCreateProfile;
 
++(void)createFollowsFromFBFriends:(NSArray *)friends;
+
 @end

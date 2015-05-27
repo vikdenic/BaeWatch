@@ -10,12 +10,12 @@
 
 @interface Activity : PFObject <PFSubclassing>
 
-@property User *fromUser;
-@property User *toUser;
+@property Profile *fromProfile;
+@property Profile *toProfile;
 @property NSString *type;
 
 +(NSString *)parseClassName;
 
--(instancetype)initFromUser: (User *)fromUser toUser:(User *)toUser type:(NSString *)type;
+-(instancetype)initFromUser: (Profile *)fromProfile toUser:(Profile *)toProfile type:(NSString *)type;
 
 @end

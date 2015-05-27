@@ -52,7 +52,6 @@
              if (error == nil)
              {
                  [User currentUser].fbId = [result objectForKey:@"id"];
-                 NSLog(@">>>fb id set");
                  [[User currentUser] saveInBackground];
              }
              completionHandler(error);
@@ -60,6 +59,37 @@
     
     [connection start];
 }
+
++(void)createFollowsFromFBFriends:(NSArray *)friends
+{
+    for (User *friend in friends)
+    {
+        [FBManager profileFromFbID:friend.fbId withCompletion:^(Profile *profile, NSError *error) {
+            Activity *newFollow = [[Activity alloc] initFromUser:[UniversalProfile sharedInstance].profile toUser:profile type:kActivityTypeFollow];
+            [newFollow saveInBackground];
+        }];
+    }
+}
+
++(void)profileFromFbID:(NSString *)fbId withCompletion:(void (^)(Profile *profile, NSError *error))completionHandler
+{
+    // Using PFQuery
+    PFQuery *profileQuery = [PFQuery queryWithClassName:@"Profile"];
+    [profileQuery includeKey:@"user"];
+
+    [profileQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+
+        for (Profile *profile in objects)
+        {
+            if ([profile.user.fbId isEqualToString:fbId])
+            {
+                completionHandler(profile, error);
+            }
+        }
+    }];
+}
+
+
 
 +(void)retrieveFbUsersInfoAndCreateProfile;
 {
