@@ -17,5 +17,7 @@
 +(NSString *)parseClassName;
 
 -(instancetype)initFromUser: (Profile *)fromProfile toUser:(Profile *)toProfile type:(NSString *)type;
++(void)retrieveFollowingWithBlock:(void (^)(NSArray *activities, NSError *error))completionHandler;
++(void)retrieveFollowersWithBlock:(void (^)(NSArray *activities, NSError *error))completionHandler;
 
 @end

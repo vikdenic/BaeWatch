@@ -16,4 +16,5 @@ NSString *const kActivityTypeFollow = @"Follow";
 NSString *const kActivityTypeBae = @"Bae";
 NSString *const kActivityTypeSwoonRequest = @"SwoonRequest";
 
+
 @end

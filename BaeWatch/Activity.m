@@ -30,4 +30,32 @@
     return self;
 }
 
++(void)retrieveFollowingWithBlock:(void (^)(NSArray *activities, NSError *error))completionHandler
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Activity"];
+    [query includeKey:@"fromProfile"];
+    [query includeKey:@"toProfile"];
+
+    [query whereKey:@"type" equalTo:kActivityTypeFollow];
+    [query whereKey:@"fromProfile" equalTo:[UniversalProfile sharedInstance].profile];
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        completionHandler(objects, error);
+    }];
+}
+
++(void)retrieveFollowersWithBlock:(void (^)(NSArray *activities, NSError *error))completionHandler
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Activity"];
+    [query includeKey:@"fromProfile"];
+    [query includeKey:@"toProfile"];
+
+    [query whereKey:@"type" equalTo:kActivityTypeFollow];
+    [query whereKey:@"toProfile" equalTo:[UniversalProfile sharedInstance].profile];
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        completionHandler(objects, error);
+    }];
+}
+
 @end
