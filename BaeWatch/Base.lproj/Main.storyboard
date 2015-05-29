@@ -331,7 +331,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="KB6-Om-cKl" firstAttribute="bottom" secondItem="aap-Xg-gv4" secondAttribute="bottomMargin" id="KTF-b6-XHD"/>
+                            <constraint firstItem="KB6-Om-cKl" firstAttribute="bottom" secondItem="aap-Xg-gv4" secondAttribute="bottomMargin" id="KTF-b6-XHD">
+                                <variation key="widthClass=compact" constant="-49"/>
+                            </constraint>
                             <constraint firstItem="KB6-Om-cKl" firstAttribute="top" secondItem="aap-Xg-gv4" secondAttribute="topMargin" id="pq7-CC-JIy">
                                 <variation key="widthClass=compact" constant="0.0"/>
                             </constraint>
@@ -404,7 +406,9 @@
                             <constraint firstAttribute="trailingMargin" secondItem="96i-vj-tU5" secondAttribute="trailing" constant="-16" id="9Wf-U1-Ubs"/>
                             <constraint firstItem="96i-vj-tU5" firstAttribute="top" secondItem="Xrv-u7-4O7" secondAttribute="topMargin" id="DE7-qh-nRu"/>
                             <constraint firstItem="96i-vj-tU5" firstAttribute="leading" secondItem="Xrv-u7-4O7" secondAttribute="leadingMargin" constant="-16" id="Ixf-Yi-8yc"/>
-                            <constraint firstItem="96i-vj-tU5" firstAttribute="bottom" secondItem="Xrv-u7-4O7" secondAttribute="bottomMargin" id="KgI-Hx-Zyx"/>
+                            <constraint firstItem="96i-vj-tU5" firstAttribute="bottom" secondItem="Xrv-u7-4O7" secondAttribute="bottomMargin" id="KgI-Hx-Zyx">
+                                <variation key="widthClass=compact" constant="-49"/>
+                            </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">

@@ -17,14 +17,15 @@
 
 NSString *const kCellFollowing = @"FollowingCell";
 
-@implementation FollowingViewController
+@implementation FollowingViewController{
+    BOOL _statusBarHidden;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self retrieveFollowing];
 }
-
 
 -(void)retrieveFollowing
 {
