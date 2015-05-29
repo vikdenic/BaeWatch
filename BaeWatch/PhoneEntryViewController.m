@@ -13,7 +13,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *phoneTextField;
 
 @end
-
+ 
 @implementation PhoneEntryViewController
 
 - (void)viewDidLoad
@@ -22,6 +22,8 @@
     [self.navigationItem setHidesBackButton:YES];
 
     [self addressBook];
+
+    // TODO: Prevent duplicate follow activies
 }
 
 - (IBAction)onDoneButtonTapped:(UIBarButtonItem *)sender
@@ -37,6 +39,7 @@
         {
             usersNumber = [usersNumber substringFromIndex:1];
         }
+        
         [currentProfile setPhoneNumber:usersNumber];
 
         [currentProfile saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

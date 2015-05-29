@@ -326,7 +326,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="KB6-Om-cKl" firstAttribute="bottom" secondItem="aap-Xg-gv4" secondAttribute="bottomMargin" id="KTF-b6-XHD"/>
-                            <constraint firstItem="KB6-Om-cKl" firstAttribute="top" secondItem="aap-Xg-gv4" secondAttribute="topMargin" id="pq7-CC-JIy"/>
+                            <constraint firstItem="KB6-Om-cKl" firstAttribute="top" secondItem="aap-Xg-gv4" secondAttribute="topMargin" id="pq7-CC-JIy">
+                                <variation key="widthClass=compact" constant="64"/>
+                            </constraint>
                             <constraint firstAttribute="trailingMargin" secondItem="KB6-Om-cKl" secondAttribute="trailing" constant="-16" id="r6D-q8-GrM"/>
                             <constraint firstItem="KB6-Om-cKl" firstAttribute="leading" secondItem="aap-Xg-gv4" secondAttribute="leadingMargin" constant="-16" id="vhH-DP-96b"/>
                         </constraints>
@@ -393,7 +395,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Skx-Cr-qCj" firstAttribute="bottom" secondItem="Xrv-u7-4O7" secondAttribute="bottomMargin" id="8SI-2q-xjV"/>
-                            <constraint firstItem="Skx-Cr-qCj" firstAttribute="top" secondItem="Xrv-u7-4O7" secondAttribute="topMargin" id="Lkf-ui-lav"/>
+                            <constraint firstItem="Skx-Cr-qCj" firstAttribute="top" secondItem="Xrv-u7-4O7" secondAttribute="topMargin" id="Lkf-ui-lav">
+                                <variation key="widthClass=compact" constant="64"/>
+                            </constraint>
                             <constraint firstItem="Skx-Cr-qCj" firstAttribute="leading" secondItem="Xrv-u7-4O7" secondAttribute="leadingMargin" constant="-16" id="kB9-e5-0kM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Skx-Cr-qCj" secondAttribute="trailing" constant="-16" id="oMY-aT-pnT"/>
                         </constraints>

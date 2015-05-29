@@ -27,8 +27,8 @@ NSString *const kCellFollower = @"FollowerCell";
 
 -(void)retrieveFollowers
 {
-    [Activity retrieveFollowersWithBlock:^(NSArray *activitesArray, NSError *error) {
-        self.activitiesArray = activitesArray;
+    [Activity retrieveFollowersWithBlock:^(NSArray *activites, NSError *error) {
+        self.activitiesArray = activites;
         [self.tableView reloadData];
     }];
 }
