@@ -1,0 +1,14 @@
+{
+  "global": {
+    "parseVersion": "1.4.2"
+  },
+  "applications": {
+    "Bae Watch": {
+      "applicationId": "Y5tuRfbwpGIbfTrnDOSpaOSpQQ9HXuvPynaPFZ36",
+      "masterKey": "EdHHevT95naywmba3MQvUxbgLy85V7Rga2ty688X"
+    },
+    "_default": {
+      "link": "Bae Watch"
+    }
+  }
+}
