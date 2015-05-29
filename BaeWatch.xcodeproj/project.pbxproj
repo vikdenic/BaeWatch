@@ -117,6 +117,7 @@
 		932AF8851B06946A007E859D = {
 			isa = PBXGroup;
 			children = (
+				932AF89B1B06946A007E859D /* Main.storyboard */,
 				932AF8901B06946A007E859D /* BaeWatch */,
 				932AF8AA1B06946A007E859D /* BaeWatchTests */,
 				932AF88F1B06946A007E859D /* Products */,
@@ -139,7 +140,6 @@
 			children = (
 				932AF8951B06946A007E859D /* AppDelegate.h */,
 				932AF8961B06946A007E859D /* AppDelegate.m */,
-				932AF89B1B06946A007E859D /* Main.storyboard */,
 				932AF89E1B06946A007E859D /* Images.xcassets */,
 				932AF8A01B06946A007E859D /* LaunchScreen.xib */,
 				932AF8911B06946A007E859D /* Supporting Files */,
@@ -437,6 +437,7 @@
 				932AF89C1B06946A007E859D /* Base */,
 			);
 			name = Main.storyboard;
+			path = BaeWatch;
 			sourceTree = "<group>";
 		};
 		932AF8A01B06946A007E859D /* LaunchScreen.xib */ = {

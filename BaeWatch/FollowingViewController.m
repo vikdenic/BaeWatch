@@ -25,6 +25,8 @@ NSString *const kCellFollowing = @"FollowingCell";
 {
     [super viewDidLoad];
     [self retrieveFollowing];
+
+    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
 }
 
 -(void)retrieveFollowing

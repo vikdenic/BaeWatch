@@ -23,6 +23,8 @@ NSString *const kCellFollower = @"FollowerCell";
 {
     [super viewDidLoad];
     [self retrieveFollowers];
+
+    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
 }
 
 -(void)retrieveFollowers
