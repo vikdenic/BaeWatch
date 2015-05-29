@@ -25,6 +25,7 @@ NSString *const kCellFollowing = @"FollowingCell";
     [self retrieveFollowing];
 }
 
+
 -(void)retrieveFollowing
 {
     [Activity retrieveFollowingWithBlock:^(NSArray *activities, NSError *error) {
