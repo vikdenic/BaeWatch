@@ -38,6 +38,7 @@
 
     [query whereKey:@"type" equalTo:kActivityTypeFollow];
     [query whereKey:@"fromProfile" equalTo:[UniversalProfile sharedInstance].profile];
+    [query orderByDescending:@"createdAt"];
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         completionHandler(objects, error);
@@ -52,6 +53,7 @@
 
     [query whereKey:@"type" equalTo:kActivityTypeFollow];
     [query whereKey:@"toProfile" equalTo:[UniversalProfile sharedInstance].profile];
+    [query orderByDescending:@"createdAt"];
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
         completionHandler(objects, error);

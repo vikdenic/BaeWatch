@@ -33,10 +33,23 @@
 +(void)queryAllProfilesWithSearchString:(NSString *)string andBlock:(void(^)(NSArray *profiles, NSError *error))completionHandler
 {
     PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
-    [query whereKey:@"fullName" containsString:string];
+    [query whereKey:@"fullNameLC" hasPrefix:string.lowercaseString];
 
     [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-        completionHandler(objects, error);
+
+        if (objects.count == 0)
+        {
+            PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
+            [query whereKey:@"fullNameLC" containsString:string.lowercaseString];
+
+            [query findObjectsInBackgroundWithBlock:^(NSArray *moreObjects, NSError *error) {
+                completionHandler(moreObjects, error);
+            }];
+        }
+        else
+        {
+            completionHandler(objects, error);
+        }
     }];
 }
 
