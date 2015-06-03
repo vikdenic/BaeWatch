@@ -34,13 +34,14 @@
     SearchResultsTableViewController *resultsVC = [storyboard instantiateViewControllerWithIdentifier:@"SearchResultsTVC"];
 
     self.controller = [[UISearchController alloc] initWithSearchResultsController:resultsVC];
-    self.controller.searchResultsUpdater = resultsVC;
+    [self.controller setSearchResultsUpdater:resultsVC];
 
     self.controller.hidesNavigationBarDuringPresentation = NO;
     self.controller.dimsBackgroundDuringPresentation = YES;
     self.definesPresentationContext = YES;
     
-    self.navigationItem.titleView = self.controller.searchBar;
+    [self.navigationItem setTitleView:self.controller.searchBar];
+    [self.controller.searchBar setPlaceholder:@"Search for a user"];
     [self.controller.searchBar sizeToFit];
 }
 

@@ -10,7 +10,7 @@
 
 @interface SearchResultsTableViewController ()
 
-@property NSString *displayString;
+@property NSArray *profiles;
 
 @end
 
@@ -19,7 +19,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.displayString = @"Search content here";
     [self.tableView reloadData];
     
     // Uncomment the following line to preserve selection between presentations.
@@ -33,22 +32,25 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     // Return the number of rows in the section.
-    return 5;
+    return self.profiles.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SearchResultCell" forIndexPath:indexPath];
-    
-    cell.textLabel.text = self.displayString;
+
+    cell.textLabel.text = [[self.profiles objectAtIndex:indexPath.row] fullName];
 
     return cell;
 }
 
 -(void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
-    self.displayString = searchController.searchBar.text;
-    [self.tableView reloadData];
+    [Profile queryAllProfilesWithSearchString:searchController.searchBar.text andBlock:^(NSArray *profiles, NSError *error) {
+
+        self.profiles = profiles;
+        [self.tableView reloadData];
+    }];
 }
 
 /*

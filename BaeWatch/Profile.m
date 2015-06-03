@@ -30,4 +30,14 @@
     return self;
 }
 
++(void)queryAllProfilesWithSearchString:(NSString *)string andBlock:(void(^)(NSArray *profiles, NSError *error))completionHandler
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
+    [query whereKey:@"fullName" containsString:string];
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        completionHandler(objects, error);
+    }];
+}
+
 @end
