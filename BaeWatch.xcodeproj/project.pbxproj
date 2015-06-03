@@ -27,6 +27,8 @@
 		93A59C631B090D6A00D2AB76 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A59C621B090D6A00D2AB76 /* Constants.m */; };
 		93A59C671B0989E000D2AB76 /* NameEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A59C661B0989E000D2AB76 /* NameEntryViewController.m */; };
 		93A59C6F1B098CEF00D2AB76 /* NameEntryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A59C6E1B098CEF00D2AB76 /* NameEntryTableViewCell.m */; };
+		93BCC9B01B1A29F700B5AADA /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93BCC9AF1B1A29F700B5AADA /* ExploreViewController.m */; };
+		93BCC9B31B1A4B7100B5AADA /* SearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93BCC9B21B1A4B7100B5AADA /* SearchResultsTableViewController.m */; };
 		93D8928F1B14075C0045C02B /* VZAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D8928E1B14075C0045C02B /* VZAlert.m */; };
 		93D892921B14F95D0045C02B /* PhoneEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D892911B14F95D0045C02B /* PhoneEntryViewController.m */; };
 		93D892981B152BFD0045C02B /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D892971B152BFD0045C02B /* Activity.m */; };
@@ -83,6 +85,10 @@
 		93A59C661B0989E000D2AB76 /* NameEntryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameEntryViewController.m; sourceTree = "<group>"; };
 		93A59C6D1B098CEF00D2AB76 /* NameEntryTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NameEntryTableViewCell.h; sourceTree = "<group>"; };
 		93A59C6E1B098CEF00D2AB76 /* NameEntryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameEntryTableViewCell.m; sourceTree = "<group>"; };
+		93BCC9AE1B1A29F700B5AADA /* ExploreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreViewController.h; sourceTree = "<group>"; };
+		93BCC9AF1B1A29F700B5AADA /* ExploreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreViewController.m; sourceTree = "<group>"; };
+		93BCC9B11B1A4B7100B5AADA /* SearchResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsTableViewController.h; sourceTree = "<group>"; };
+		93BCC9B21B1A4B7100B5AADA /* SearchResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsTableViewController.m; sourceTree = "<group>"; };
 		93D8928D1B14075C0045C02B /* VZAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VZAlert.h; sourceTree = "<group>"; };
 		93D8928E1B14075C0045C02B /* VZAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VZAlert.m; sourceTree = "<group>"; };
 		93D892901B14F95D0045C02B /* PhoneEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneEntryViewController.h; sourceTree = "<group>"; };
@@ -117,7 +123,6 @@
 		932AF8851B06946A007E859D = {
 			isa = PBXGroup;
 			children = (
-				932AF89B1B06946A007E859D /* Main.storyboard */,
 				932AF8901B06946A007E859D /* BaeWatch */,
 				932AF8AA1B06946A007E859D /* BaeWatchTests */,
 				932AF88F1B06946A007E859D /* Products */,
@@ -138,6 +143,7 @@
 		932AF8901B06946A007E859D /* BaeWatch */ = {
 			isa = PBXGroup;
 			children = (
+				932AF89B1B06946A007E859D /* Main.storyboard */,
 				932AF8951B06946A007E859D /* AppDelegate.h */,
 				932AF8961B06946A007E859D /* AppDelegate.m */,
 				932AF89E1B06946A007E859D /* Images.xcassets */,
@@ -197,6 +203,10 @@
 				93083AD91B17B42C009E956F /* FollowingViewController.m */,
 				93083ADB1B17BB7B009E956F /* FollowersViewController.h */,
 				93083ADC1B17BB7B009E956F /* FollowersViewController.m */,
+				93BCC9AE1B1A29F700B5AADA /* ExploreViewController.h */,
+				93BCC9AF1B1A29F700B5AADA /* ExploreViewController.m */,
+				93BCC9B11B1A4B7100B5AADA /* SearchResultsTableViewController.h */,
+				93BCC9B21B1A4B7100B5AADA /* SearchResultsTableViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -395,6 +405,7 @@
 				93083ADA1B17B42C009E956F /* FollowingViewController.m in Sources */,
 				93D892921B14F95D0045C02B /* PhoneEntryViewController.m in Sources */,
 				93D892981B152BFD0045C02B /* Activity.m in Sources */,
+				93BCC9B31B1A4B7100B5AADA /* SearchResultsTableViewController.m in Sources */,
 				932AF8FB1B07ABA2007E859D /* UniversalProfile.m in Sources */,
 				93D8928F1B14075C0045C02B /* VZAlert.m in Sources */,
 				93A59C6F1B098CEF00D2AB76 /* NameEntryTableViewCell.m in Sources */,
@@ -408,6 +419,7 @@
 				932AF8F81B079AC9007E859D /* Profile.m in Sources */,
 				932AF8EF1B06E214007E859D /* HomeViewController.m in Sources */,
 				932AF8941B06946A007E859D /* main.m in Sources */,
+				93BCC9B01B1A29F700B5AADA /* ExploreViewController.m in Sources */,
 				93E2D3431B0D8259007DAE45 /* FBManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,7 +449,6 @@
 				932AF89C1B06946A007E859D /* Base */,
 			);
 			name = Main.storyboard;
-			path = BaeWatch;
 			sourceTree = "<group>";
 		};
 		932AF8A01B06946A007E859D /* LaunchScreen.xib */ = {
