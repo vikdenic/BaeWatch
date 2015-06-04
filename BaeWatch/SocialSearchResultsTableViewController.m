@@ -8,10 +8,12 @@
 
 #import "SocialSearchResultsTableViewController.h"
 #import "ContactsManager.h"
+#import "Activity.h"
 
 @interface SocialSearchResultsTableViewController ()
 
 @property NSArray *profiles;
+@property NSMutableArray *followingProfiles;
 
 @end
 
@@ -20,12 +22,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.followingProfiles = [NSMutableArray new];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    [Activity retrieveFollowingWithBlock:^(NSArray *activities, NSError *error) {
+        for (Activity *activity in activities)
+        {
+            Profile *profile = activity.toProfile;
+            [self.followingProfiles addObject:profile.objectId];
+        }
+        [self.tableView reloadData];
+    }];
 
     if (self.searchingContacts)
     {
@@ -56,7 +64,18 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SocialResultCell" forIndexPath:indexPath];
-    cell.textLabel.text = [[self.profiles objectAtIndex:indexPath.row] fullName];
+    Profile *profile = [self.profiles objectAtIndex:indexPath.row];
+    cell.textLabel.text = profile.fullName;
+
+    if ([self.followingProfiles containsObject:profile.objectId])
+    {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    }
+    else
+    {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+    }
+
     return cell;
 }
 
