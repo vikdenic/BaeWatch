@@ -18,4 +18,6 @@
 
 +(void)createFollowsFromFBFriends:(NSArray *)friends;
 
++(void)linkFBtoUser:(User *)user withCompletion:(void(^)(NSError *error))completionHandler;
+
 @end

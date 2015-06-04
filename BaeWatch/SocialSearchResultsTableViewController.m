@@ -1,56 +1,63 @@
 //
-//  ResultsTableViewController.m
+//  SocialSearchResultsTableViewController.m
 //  BaeWatch
 //
-//  Created by Vik Denic on 5/30/15.
+//  Created by Vik Denic on 6/3/15.
 //  Copyright (c) 2015 nektar labs. All rights reserved.
 //
 
-#import "SearchResultsTableViewController.h"
+#import "SocialSearchResultsTableViewController.h"
+#import "ContactsManager.h"
 
-@interface SearchResultsTableViewController ()
+@interface SocialSearchResultsTableViewController ()
 
 @property NSArray *profiles;
 
 @end
 
-@implementation SearchResultsTableViewController
+@implementation SocialSearchResultsTableViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-
-    [self.tableView reloadData];
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+    if (self.searchingContacts)
+    {
+        [ContactsManager requestContactsAccess:^(BOOL success, ABAddressBookRef addressBook, CFErrorRef error) {
+            [ContactsManager listPeopleInAddressBook:addressBook withCompletion:^(NSArray *numbers) {
+                [ContactsManager findProfilesFromNumbers:numbers withCompletion:^(NSArray *profiles) {
+                    self.profiles = profiles;
+                    [self.tableView reloadData];
+                }];
+            }];
+        }];
+    }
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+//    // Return the number of sections.
+//    return 0;
+//}
+//
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     // Return the number of rows in the section.
-//    return self.profiles.count;
     return self.profiles.count;
 }
 
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SearchResultCell" forIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SocialResultCell" forIndexPath:indexPath];
     cell.textLabel.text = [[self.profiles objectAtIndex:indexPath.row] fullName];
     return cell;
-}
-
--(void)updateSearchResultsForSearchController:(UISearchController *)searchController
-{
-    [Profile queryAllProfilesWithSearchString:searchController.searchBar.text andBlock:^(NSArray *profiles, NSError *error) {
-
-        self.profiles = profiles;
-        [self.tableView reloadData];
-    }];
 }
 
 /*

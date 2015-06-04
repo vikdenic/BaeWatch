@@ -16,4 +16,8 @@ extern NSString *const kActivityTypeFollow;
 extern NSString *const kActivityTypeBae;
 extern NSString *const kActivityTypeSwoonRequest;
 
+extern NSString *const kStatus;
+extern NSString *const kBar;
+extern NSString *const kWindow;
+
 @end

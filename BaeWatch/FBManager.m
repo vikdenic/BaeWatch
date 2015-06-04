@@ -109,7 +109,6 @@
             Profile *currentProfile = [[UniversalProfile sharedInstance] profile];
             currentProfile.fullName = name;
 
-
             [currentProfile saveInBackground];
 
             NSURL *pictureURL = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large&return_ssl_resources=1", facebookID]];
@@ -130,6 +129,15 @@
                  }
              }];
         }
+    }];
+}
+
++(void)linkFBtoUser:(User *)user withCompletion:(void(^)(NSError *error))completionHandler
+{
+    NSArray *permissionsArray = @[@"public_profile", @"user_friends", @"email"];
+
+    [PFFacebookUtils linkUserInBackground:user withReadPermissions:permissionsArray block:^(BOOL succeeded, NSError *error) {
+        completionHandler(error);
     }];
 }
 

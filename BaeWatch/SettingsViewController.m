@@ -31,4 +31,23 @@ NSString *const kSegueLogoutToRegister = @"LogoutToRegisterSegue";
     }];
 }
 
+- (IBAction)onLinkWithFBTapped:(UIButton *)sender
+{
+    User *currentUser = [User currentUser];
+
+    [FBManager linkFBtoUser:currentUser withCompletion:^(NSError *error) {
+        if (error == nil)
+        {
+            [FBManager setUsersFbIdWithBlock:^(NSError *error) {
+                NSLog(@"%@", currentUser.fbId);
+            }];
+
+            NSLog(@"succeeded");
+        }
+        else
+        {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
 @end

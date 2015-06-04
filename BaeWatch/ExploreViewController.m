@@ -8,13 +8,12 @@
 
 #import "ExploreViewController.h"
 #import "SearchResultsTableViewController.h"
+#import "SocialSearchResultsTableViewController.h"
 
 @interface ExploreViewController () <UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property UISearchController *controller;
-
-@property NSMutableArray *resultsArray;
 
 @end
 
@@ -25,7 +24,7 @@
     [super viewDidLoad];
     [self implementSearchBar];
 
-    self.resultsArray = [NSMutableArray arrayWithObjects:@"Explore", @"Content", @"Here", nil];
+    [self.navigationController hidesBarsOnSwipe];
 }
 
 -(void)implementSearchBar
@@ -47,14 +46,35 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SearchResultCell"];
-    cell.textLabel.text = [self.resultsArray objectAtIndex:indexPath.row];
-    return cell;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SearchOptionCell"];
+
+    if (indexPath.row == 0)
+    {
+        cell.textLabel.text = @"Your Facebook Friends";
+        cell.imageView.image = [UIImage imageNamed:@"facebookIcon"];
+        return cell;
+    }
+    else
+    {
+        cell.textLabel.text = @"Your Contacts";
+        cell.imageView.image = [UIImage imageNamed:@"contactsIcon"];
+        return cell;
+    }
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.resultsArray.count;
+    return 2;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"ExploreToSocialResultsSegue"])
+    {
+        SocialSearchResultsTableViewController *socialSearchTVC = segue.destinationViewController;
+        BOOL selectedRow = [[[self.tableView indexPathsForSelectedRows] firstObject] row];
+        [socialSearchTVC setSearchingContacts:selectedRow];
+    }
 }
 
 @end

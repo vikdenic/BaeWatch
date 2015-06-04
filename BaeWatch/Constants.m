@@ -15,6 +15,8 @@ NSString *const kNotificationNewUser = @"NewUserLoggedInNotifciation";
 NSString *const kActivityTypeFollow = @"Follow";
 NSString *const kActivityTypeBae = @"Bae";
 NSString *const kActivityTypeSwoonRequest = @"SwoonRequest";
-
+NSString *const kStatus = @"status";
+NSString *const kBar = @"Bar";
+NSString *const kWindow = @"Window";
 
 @end

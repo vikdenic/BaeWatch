@@ -10,6 +10,8 @@
 		79DDD1499272950D69587FF7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13BEBBB78B317F6AF75FE180 /* libPods.a */; };
 		93083ADA1B17B42C009E956F /* FollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93083AD91B17B42C009E956F /* FollowingViewController.m */; };
 		93083ADD1B17BB7B009E956F /* FollowersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93083ADC1B17BB7B009E956F /* FollowersViewController.m */; };
+		930E89591B1FE3D800ACACEF /* SocialSearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 930E89581B1FE3D800ACACEF /* SocialSearchResultsTableViewController.m */; };
+		930E895C1B1FEC7B00ACACEF /* ContactsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 930E895B1B1FEC7B00ACACEF /* ContactsManager.m */; };
 		932AF8941B06946A007E859D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 932AF8931B06946A007E859D /* main.m */; };
 		932AF8971B06946A007E859D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 932AF8961B06946A007E859D /* AppDelegate.m */; };
 		932AF89A1B06946A007E859D /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 932AF8991B06946A007E859D /* RegisterViewController.m */; };
@@ -52,6 +54,10 @@
 		93083AD91B17B42C009E956F /* FollowingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowingViewController.m; sourceTree = "<group>"; };
 		93083ADB1B17BB7B009E956F /* FollowersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowersViewController.h; sourceTree = "<group>"; };
 		93083ADC1B17BB7B009E956F /* FollowersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowersViewController.m; sourceTree = "<group>"; };
+		930E89571B1FE3D800ACACEF /* SocialSearchResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialSearchResultsTableViewController.h; sourceTree = "<group>"; };
+		930E89581B1FE3D800ACACEF /* SocialSearchResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialSearchResultsTableViewController.m; sourceTree = "<group>"; };
+		930E895A1B1FEC7B00ACACEF /* ContactsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsManager.h; sourceTree = "<group>"; };
+		930E895B1B1FEC7B00ACACEF /* ContactsManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsManager.m; sourceTree = "<group>"; };
 		932AF88E1B06946A007E859D /* BaeWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BaeWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		932AF8921B06946A007E859D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		932AF8931B06946A007E859D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -207,6 +213,8 @@
 				93BCC9AF1B1A29F700B5AADA /* ExploreViewController.m */,
 				93BCC9B11B1A4B7100B5AADA /* SearchResultsTableViewController.h */,
 				93BCC9B21B1A4B7100B5AADA /* SearchResultsTableViewController.m */,
+				930E89571B1FE3D800ACACEF /* SocialSearchResultsTableViewController.h */,
+				930E89581B1FE3D800ACACEF /* SocialSearchResultsTableViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -222,6 +230,8 @@
 				932AF8FA1B07ABA2007E859D /* UniversalProfile.m */,
 				93D892961B152BFD0045C02B /* Activity.h */,
 				93D892971B152BFD0045C02B /* Activity.m */,
+				930E895A1B1FEC7B00ACACEF /* ContactsManager.h */,
+				930E895B1B1FEC7B00ACACEF /* ContactsManager.m */,
 				93E2D3411B0D8259007DAE45 /* FBManager.h */,
 				93E2D3421B0D8259007DAE45 /* FBManager.m */,
 			);
@@ -404,6 +414,7 @@
 				932AF8EC1B06DDB2007E859D /* User.m in Sources */,
 				93083ADA1B17B42C009E956F /* FollowingViewController.m in Sources */,
 				93D892921B14F95D0045C02B /* PhoneEntryViewController.m in Sources */,
+				930E89591B1FE3D800ACACEF /* SocialSearchResultsTableViewController.m in Sources */,
 				93D892981B152BFD0045C02B /* Activity.m in Sources */,
 				93BCC9B31B1A4B7100B5AADA /* SearchResultsTableViewController.m in Sources */,
 				932AF8FB1B07ABA2007E859D /* UniversalProfile.m in Sources */,
@@ -414,6 +425,7 @@
 				932AF9061B08F796007E859D /* SettingsViewController.m in Sources */,
 				932AF89A1B06946A007E859D /* RegisterViewController.m in Sources */,
 				93A59C631B090D6A00D2AB76 /* Constants.m in Sources */,
+				930E895C1B1FEC7B00ACACEF /* ContactsManager.m in Sources */,
 				93083ADD1B17BB7B009E956F /* FollowersViewController.m in Sources */,
 				932AF8971B06946A007E859D /* AppDelegate.m in Sources */,
 				932AF8F81B079AC9007E859D /* Profile.m in Sources */,

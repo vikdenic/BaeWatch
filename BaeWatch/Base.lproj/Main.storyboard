@@ -261,17 +261,31 @@
                                     <action selector="onLogoutTapped:" destination="BxV-YF-i57" eventType="touchUpInside" id="XDp-HT-Pf3"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tab-yt-bLE">
+                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                <state key="normal" title="Link with Facebook">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onLinkWithFBTapped:" destination="BxV-YF-i57" eventType="touchUpInside" id="uXJ-uV-bMA"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="pMt-E3-4Z4" firstAttribute="top" secondItem="Tab-yt-bLE" secondAttribute="bottom" constant="57" id="8XN-YW-WUn"/>
                             <constraint firstAttribute="centerX" secondItem="pMt-E3-4Z4" secondAttribute="centerX" id="Qwu-S8-hvd"/>
+                            <constraint firstItem="Tab-yt-bLE" firstAttribute="centerX" secondItem="pMt-E3-4Z4" secondAttribute="centerX" id="WIe-EA-Uqf"/>
                             <constraint firstAttribute="centerY" secondItem="pMt-E3-4Z4" secondAttribute="centerY" id="YW5-BT-sga"/>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
                                 <exclude reference="pMt-E3-4Z4"/>
+                                <exclude reference="Tab-yt-bLE"/>
                             </mask>
                             <mask key="constraints">
+                                <exclude reference="WIe-EA-Uqf"/>
+                                <exclude reference="8XN-YW-WUn"/>
                                 <exclude reference="Qwu-S8-hvd"/>
                                 <exclude reference="YW5-BT-sga"/>
                             </mask>
@@ -279,8 +293,11 @@
                         <variation key="widthClass=compact">
                             <mask key="subviews">
                                 <include reference="pMt-E3-4Z4"/>
+                                <include reference="Tab-yt-bLE"/>
                             </mask>
                             <mask key="constraints">
+                                <include reference="WIe-EA-Uqf"/>
+                                <include reference="8XN-YW-WUn"/>
                                 <include reference="Qwu-S8-hvd"/>
                                 <include reference="YW5-BT-sga"/>
                             </mask>
@@ -1076,12 +1093,15 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchResultCell" rowHeight="65" id="rv4-8l-V0n">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="SearchOptionCell" rowHeight="65" id="rv4-8l-V0n">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rv4-8l-V0n" id="7Yb-8f-8Rj">
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="kSJ-Sa-qHm" kind="show" identifier="ExploreToSocialResultsSegue" id="tgv-je-Brr"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -1155,7 +1175,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PfM-Un-Qe0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1987.5" y="-209"/>
+            <point key="canvasLocation" x="1245" y="-862"/>
         </scene>
         <!--Home-->
         <scene sceneID="IDG-TR-UQT">
@@ -1214,6 +1234,31 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XOh-kO-m0E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="478.5" y="1268"/>
+        </scene>
+        <!--Social Search Results Table View Controller-->
+        <scene sceneID="V04-Qy-yCd">
+            <objects>
+                <tableViewController id="kSJ-Sa-qHm" customClass="SocialSearchResultsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="65" sectionHeaderHeight="22" sectionFooterHeight="22" id="ghT-0A-ika">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SocialResultCell" rowHeight="65" id="DwI-NC-h5D">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DwI-NC-h5D" id="3iW-CH-XtF">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="kSJ-Sa-qHm" id="n3J-dC-h8o"/>
+                            <outlet property="delegate" destination="kSJ-Sa-qHm" id="lMQ-sY-LmH"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e9k-uR-SRr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1941" y="-209"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="5Lp-4N-B2P">
