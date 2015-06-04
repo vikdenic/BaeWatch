@@ -8,6 +8,7 @@
 
 #import "SocialSearchResultsTableViewController.h"
 #import "ContactsManager.h"
+#import "FBManager.h"
 #import "Activity.h"
 
 @interface SocialSearchResultsTableViewController ()
@@ -26,6 +27,8 @@
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
+
+
     [Activity retrieveFollowingWithBlock:^(NSArray *activities, NSError *error) {
         for (Activity *activity in activities)
         {
@@ -44,6 +47,14 @@
                     [self.tableView reloadData];
                 }];
             }];
+        }];
+    }
+    else
+    {
+        [FBManager findFBFriendsWithBlock:^(NSArray *users, NSError *error) {
+            //TODO: Return profiles of FB friends here
+            self.profiles = [NSMutableArray arrayWithArray:users];
+            [self.tableView reloadData];
         }];
     }
 }
@@ -69,14 +80,87 @@
 
     if ([self.followingProfiles containsObject:profile.objectId])
     {
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [self handleAccessoryTap:cell isFollowing:YES];
     }
     else
     {
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        [self handleAccessoryTap:cell isFollowing:NO];
     }
 
     return cell;
+}
+
+-(void)handleAccessoryTap:(UITableViewCell *)cell isFollowing:(BOOL)isFollowing
+{
+    if (isFollowing)
+    {
+        UIImage *checkmarkImage = [UIImage imageNamed:@"checkmarkAccessoryImage"];
+        UIButton *checkmarkButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+        [checkmarkButton setImage:checkmarkImage forState:UIControlStateNormal];
+        [checkmarkButton addTarget:self action:@selector(onCheckmarkAccessoryTapped:event:) forControlEvents:UIControlEventTouchUpInside];
+        cell.accessoryView = checkmarkButton;
+    }
+    else
+    {
+        UIImage *checkmarkImage = [UIImage imageNamed:@"addAccessoryImage"];
+        UIButton *checkmarkButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+        [checkmarkButton setImage:checkmarkImage forState:UIControlStateNormal];
+        [checkmarkButton addTarget:self action:@selector(onAddAccessoryTapped:event:) forControlEvents:UIControlEventTouchUpInside];
+        cell.accessoryView = checkmarkButton;
+    }
+}
+
+-(void)onCheckmarkAccessoryTapped:(id)sender event:(id)event
+{
+    NSSet *touches = [event allTouches];
+    UITouch *touch = [touches anyObject];
+    CGPoint currentTouchPosition = [touch locationInView:self.tableView];
+
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
+    if (indexPath != nil)
+    {
+        [self tableView:self.tableView accessoryButtonTappedForRowWithIndexPath: indexPath];
+
+        [self presentAlertController:indexPath];
+    }
+}
+
+-(void)onAddAccessoryTapped:(id)sender event:(id)event
+{
+    NSSet *touches = [event allTouches];
+    UITouch *touch = [touches anyObject];
+    CGPoint currentTouchPosition = [touch locationInView:self.tableView];
+
+    NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
+    if (indexPath != nil)
+    {
+        [self tableView:self.tableView accessoryButtonTappedForRowWithIndexPath: indexPath];
+
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        [self handleAccessoryTap:cell isFollowing:YES];
+    }
+}
+
+-(void)presentAlertController:(NSIndexPath *)indexPath
+{
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Unfollow?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction *addAction = [UIAlertAction actionWithTitle:@"Unfollow" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        [self handleAccessoryTap:cell isFollowing:NO];
+    }];
+
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+
+    [controller addAction:addAction];
+    [controller addAction:cancelAction];
+
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
+-(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
+{
+
 }
 
 /*
