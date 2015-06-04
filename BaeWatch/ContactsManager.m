@@ -79,14 +79,13 @@
     }];
 }
 
-+(void)createsFollowsFromProfiles:(NSArray *)profiles withCompletion:(void (^)(BOOL succeeded))completionHandler
++(void)createsFollowsFromProfiles:(NSArray *)profiles
 {
     for (Profile *profile in profiles)
     {
         Activity *newFollow = [[Activity alloc] initFromUser:[UniversalProfile sharedInstance].profile toUser:profile type:kActivityTypeFollow];
         [newFollow saveInBackground];
     }
-    completionHandler(YES);
 }
 
 @end

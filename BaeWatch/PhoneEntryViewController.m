@@ -8,6 +8,7 @@
 
 #import "PhoneEntryViewController.h"
 #import <AddressBook/AddressBook.h>
+#import "ContactsManager.h"
 
 @interface PhoneEntryViewController () <UITextFieldDelegate>
 @property (strong, nonatomic) IBOutlet UITextField *phoneTextField;
@@ -21,9 +22,13 @@
     [super viewDidLoad];
     [self.navigationItem setHidesBackButton:YES];
 
-    [self addressBook];
-
-    // TODO: Prevent duplicate follow activies
+    [ContactsManager requestContactsAccess:^(BOOL success, ABAddressBookRef addressBook, CFErrorRef error) {
+        [ContactsManager listPeopleInAddressBook:addressBook withCompletion:^(NSArray *numbers) {
+            [ContactsManager findProfilesFromNumbers:numbers withCompletion:^(NSArray *profiles) {
+                [ContactsManager createsFollowsFromProfiles:profiles];
+            }];
+        }];
+    }];
 }
 
 - (IBAction)onDoneButtonTapped:(UIBarButtonItem *)sender
@@ -57,75 +62,6 @@
     {
         [VZAlert showAlertWithTitle:@"Oops" message:@"Please enter your full phone number, beginning with the area code" viewController:self];
     }
-}
-
--(void)addressBook
-{
-    CFErrorRef error = NULL;
-    ABAddressBookRef addressBook = ABAddressBookCreateWithOptions(NULL, &error);
-
-    ABAddressBookRequestAccessWithCompletion(addressBook, ^(bool granted, CFErrorRef error) {
-        if (!granted){
-            //4
-            NSLog(@"Just denied");
-            return;
-        }
-        //5
-        NSLog(@"Just authorized");
-        [self listPeopleInAddressBook:addressBook withCompletion:^(NSArray *numbers) {
-            [self createFollowsFromNumbers:numbers];
-        }];
-    });
-}
-
-- (void)listPeopleInAddressBook:(ABAddressBookRef)addressBook withCompletion:(void (^)(NSArray *numbers))completionHandler
-{
-    NSMutableArray *numbersArray = [NSMutableArray new];
-
-    NSArray *allPeople = CFBridgingRelease(ABAddressBookCopyArrayOfAllPeople(addressBook));
-    NSInteger numberOfPeople = [allPeople count];
-
-    for (NSInteger i = 0; i < numberOfPeople; i++) {
-        ABRecordRef person = (__bridge ABRecordRef)allPeople[i];
-
-        ABMultiValueRef phoneNumbers = ABRecordCopyValue(person, kABPersonPhoneProperty);
-
-        CFIndex numberOfPhoneNumbers = ABMultiValueGetCount(phoneNumbers);
-
-        for (CFIndex i = 0; i < numberOfPhoneNumbers; i++)
-        {
-            NSString *phoneNumber = CFBridgingRelease(ABMultiValueCopyValueAtIndex(phoneNumbers, i));
-            NSString *trimmedNumber = [[phoneNumber componentsSeparatedByCharactersInSet:
-                                    [[NSCharacterSet decimalDigitCharacterSet] invertedSet]]
-                                   componentsJoinedByString:@""];
-            if ([trimmedNumber hasPrefix:@"1"] && [trimmedNumber length] > 1)
-            {
-                trimmedNumber = [trimmedNumber substringFromIndex:1];
-            }
-            [numbersArray addObject:trimmedNumber];
-        }
-        CFRelease(phoneNumbers);
-    }
-    completionHandler(numbersArray);
-}
-
--(void)createFollowsFromNumbers:(NSArray *)numbers
-{
-    // Using PFQuery
-    PFQuery *profileQuery = [PFQuery queryWithClassName:@"Profile"];
-    [profileQuery includeKey:@"user"];
-
-    [profileQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-
-        for (Profile *profile in objects)
-        {
-            if ([numbers containsObject:profile.phoneNumber])
-            {
-                Activity *newFollow = [[Activity alloc] initFromUser:[UniversalProfile sharedInstance].profile toUser:profile type:kActivityTypeFollow];
-                [newFollow saveInBackground];
-            }
-        }
-    }];
 }
 
 #pragma mark - textfield delegate

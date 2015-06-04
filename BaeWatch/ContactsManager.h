@@ -14,6 +14,6 @@
 +(void)requestContactsAccess:(void (^)(BOOL success, ABAddressBookRef addressBook, CFErrorRef error))completionHandler;
 +(void)listPeopleInAddressBook:(ABAddressBookRef)addressBook withCompletion:(void (^)(NSArray *numbers))completionHandler;
 +(void)findProfilesFromNumbers:(NSArray *)numbers withCompletion:(void (^)(NSArray *profiles))completionHandler;
-+(void)createsFollowsFromProfiles:(NSArray *)profiles withCompletion:(void (^)(BOOL succeeded))completionHandler;
++(void)createsFollowsFromProfiles:(NSArray *)profiles;
 
 @end
