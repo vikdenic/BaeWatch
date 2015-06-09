@@ -19,5 +19,6 @@
 
 -(instancetype)initWithUser: (User *)user;
 +(void)queryAllProfilesWithSearchString:(NSString *)string andBlock:(void(^)(NSArray *profiles, NSError *error))completionHandler;
++(void)queryAllProfilesFromUsers:(NSArray *)users withBlock:(void(^)(NSArray *profiles, NSError *error))completionHandler;
 
 @end

@@ -31,6 +31,20 @@
     }];
 }
 
++(void)getProfilesFromUsers:(NSArray *)users completion:(void (^)(BOOL, NSError *))completionHandler
+{
+    PFQuery *query1 = [PFQuery queryWithClassName:@"User"];
+
+
+    // Create a query for Places liked by People in Australia.
+    PFQuery *query2 = [PFQuery queryWithClassName:@"Place"];
+    [query2 whereKey:@"likes" matchesQuery:query1];
+    [query2 findObjectsInBackgroundWithBlock:^(NSArray *results, NSError*error) {
+        // results contains the places that are liked by people from Australia
+    }];
+}
+
+
 -(instancetype)initWithUsername:(NSString *)username withPassword: (NSString *)password
 {
     self = [super init];

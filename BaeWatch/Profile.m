@@ -53,4 +53,16 @@
     }];
 }
 
++(void)queryAllProfilesFromUsers:(NSArray *)users withBlock:(void(^)(NSArray *profiles, NSError *error))completionHandler
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
+    [query includeKey:@"user"];
+    [query whereKey:@"user" containedIn:users];
+
+    [query findObjectsInBackgroundWithBlock:^(NSArray *profiles, NSError *error) {
+        completionHandler(profiles, error);
+//        NSLog(@"Profiles are: %@", profiles);
+    }];
+}
+
 @end

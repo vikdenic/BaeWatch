@@ -53,8 +53,11 @@
     {
         [FBManager findFBFriendsWithBlock:^(NSArray *users, NSError *error) {
             //TODO: Return profiles of FB friends here
-            self.profiles = [NSMutableArray arrayWithArray:users];
-            [self.tableView reloadData];
+//            self.profiles = [NSMutableArray arrayWithArray:users];
+            [Profile queryAllProfilesFromUsers:users withBlock:^(NSArray *profiles, NSError *error) {
+                self.profiles = profiles;
+                [self.tableView reloadData];
+            }];
         }];
     }
 }
@@ -80,11 +83,11 @@
 
     if ([self.followingProfiles containsObject:profile.objectId])
     {
-        [self handleAccessoryTap:cell isFollowing:YES];
+        [self handleAccessoryTap:cell isFollowing:NO];
     }
     else
     {
-        [self handleAccessoryTap:cell isFollowing:NO];
+        [self handleAccessoryTap:cell isFollowing:YES];
     }
 
     return cell;
@@ -92,22 +95,19 @@
 
 -(void)handleAccessoryTap:(UITableViewCell *)cell isFollowing:(BOOL)isFollowing
 {
+    UIImage *image = [UIImage imageNamed:@"checkmarkAccessoryImage"];
+    SEL selector = @selector(onCheckmarkAccessoryTapped:event:);
+
     if (isFollowing)
     {
-        UIImage *checkmarkImage = [UIImage imageNamed:@"checkmarkAccessoryImage"];
-        UIButton *checkmarkButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
-        [checkmarkButton setImage:checkmarkImage forState:UIControlStateNormal];
-        [checkmarkButton addTarget:self action:@selector(onCheckmarkAccessoryTapped:event:) forControlEvents:UIControlEventTouchUpInside];
-        cell.accessoryView = checkmarkButton;
+        image = [UIImage imageNamed:@"addAccessoryImage"];
+        selector = @selector(onAddAccessoryTapped:event:);
     }
-    else
-    {
-        UIImage *checkmarkImage = [UIImage imageNamed:@"addAccessoryImage"];
-        UIButton *checkmarkButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
-        [checkmarkButton setImage:checkmarkImage forState:UIControlStateNormal];
-        [checkmarkButton addTarget:self action:@selector(onAddAccessoryTapped:event:) forControlEvents:UIControlEventTouchUpInside];
-        cell.accessoryView = checkmarkButton;
-    }
+
+    UIButton *checkmarkButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 25, 25)];
+    [checkmarkButton setImage:image forState:UIControlStateNormal];
+    [checkmarkButton addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
+    cell.accessoryView = checkmarkButton;
 }
 
 -(void)onCheckmarkAccessoryTapped:(id)sender event:(id)event
@@ -137,7 +137,7 @@
         [self tableView:self.tableView accessoryButtonTappedForRowWithIndexPath: indexPath];
 
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        [self handleAccessoryTap:cell isFollowing:YES];
+        [self handleAccessoryTap:cell isFollowing:NO];
     }
 }
 
@@ -147,7 +147,7 @@
 
     UIAlertAction *addAction = [UIAlertAction actionWithTitle:@"Unfollow" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        [self handleAccessoryTap:cell isFollowing:NO];
+        [self handleAccessoryTap:cell isFollowing:YES];
     }];
 
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
