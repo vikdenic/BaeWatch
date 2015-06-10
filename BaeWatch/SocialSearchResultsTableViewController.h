@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SocialSearchResultsTableViewController : UITableViewController
+@interface SocialSearchResultsTableViewController : UITableViewController <UISearchResultsUpdating>
 
 @property BOOL searchingContacts;
+@property BOOL searchingFacebook;
 
 @end

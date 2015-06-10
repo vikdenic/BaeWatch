@@ -62,4 +62,36 @@
     }];
 }
 
++(void)followToProfile:(Profile *)profile withCompletion:(void (^)(BOOL succeeded, NSError *error))completionHandler
+{
+    Activity *follow = [Activity new];
+
+    follow.type = kActivityTypeFollow;
+    follow.toProfile = profile;
+    follow.fromProfile = [[UniversalProfile sharedInstance] profile];
+
+    [follow saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+    {
+        completionHandler(succeeded, error);
+    }];
+}
+
++(void)removeFollowFromProfile:(Profile *)profile withCompletion:(void (^)(BOOL succeeded, NSError *error))completionHandler
+{
+    PFQuery *query = [PFQuery queryWithClassName:@"Activity"];
+
+    [query includeKey:@"toProfile"];
+    [query includeKey:@"fromProfile"];
+
+    [query whereKey:@"toProfile" equalTo:profile];
+    [query whereKey:@"fromProfile" equalTo:[UniversalProfile sharedInstance].profile];
+
+    [query getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error)
+    {
+        [object deleteInBackgroundWithBlock:^(BOOL succeeded, NSError *error)
+        {
+            completionHandler(succeeded, error);
+        }];
+    }];
+}
 @end

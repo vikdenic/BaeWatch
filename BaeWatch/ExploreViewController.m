@@ -30,7 +30,7 @@
 -(void)implementSearchBar
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    SearchResultsTableViewController *resultsVC = [storyboard instantiateViewControllerWithIdentifier:@"SearchResultsTVC"];
+    SearchResultsTableViewController *resultsVC = [storyboard instantiateViewControllerWithIdentifier:@"SocialSearchResultsTableViewController"];
 
     self.controller = [[UISearchController alloc] initWithSearchResultsController:resultsVC];
     [self.controller setSearchResultsUpdater:resultsVC];
@@ -73,7 +73,16 @@
     {
         SocialSearchResultsTableViewController *socialSearchTVC = segue.destinationViewController;
         BOOL selectedRow = [[[self.tableView indexPathsForSelectedRows] firstObject] row];
-        [socialSearchTVC setSearchingContacts:selectedRow];
+
+        if (selectedRow == 0)
+        {
+            [socialSearchTVC setSearchingFacebook:YES];
+        }
+
+        if (selectedRow == 1)
+        {
+            [socialSearchTVC setSearchingContacts:YES];
+        }
     }
 }
 

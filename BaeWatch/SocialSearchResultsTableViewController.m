@@ -49,7 +49,8 @@
             }];
         }];
     }
-    else
+
+    if (self.searchingFacebook)
     {
         [FBManager findFBFriendsWithBlock:^(NSArray *users, NSError *error) {
             //TODO: Return profiles of FB friends here
@@ -60,6 +61,15 @@
             }];
         }];
     }
+}
+
+-(void)updateSearchResultsForSearchController:(UISearchController *)searchController
+{
+    [Profile queryAllProfilesWithSearchString:searchController.searchBar.text andBlock:^(NSArray *profiles, NSError *error) {
+
+        self.profiles = profiles;
+        [self.tableView reloadData];
+    }];
 }
 
 #pragma mark - Table view data source
@@ -110,6 +120,8 @@
     cell.accessoryView = checkmarkButton;
 }
 
+
+
 -(void)onCheckmarkAccessoryTapped:(id)sender event:(id)event
 {
     NSSet *touches = [event allTouches];
@@ -134,10 +146,12 @@
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
     if (indexPath != nil)
     {
-        [self tableView:self.tableView accessoryButtonTappedForRowWithIndexPath: indexPath];
+        [Activity followToProfile:self.profiles[indexPath.row] withCompletion:^(BOOL succeeded, NSError *error) {
+            [self tableView:self.tableView accessoryButtonTappedForRowWithIndexPath: indexPath];
 
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        [self handleAccessoryTap:cell isFollowing:NO];
+            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+            [self handleAccessoryTap:cell isFollowing:NO];
+        }];
     }
 }
 
@@ -145,14 +159,16 @@
 {
     UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Unfollow?" message:nil preferredStyle:UIAlertControllerStyleAlert];
 
-    UIAlertAction *addAction = [UIAlertAction actionWithTitle:@"Unfollow" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    UIAlertAction *unfollowAction = [UIAlertAction actionWithTitle:@"Unfollow" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-        [self handleAccessoryTap:cell isFollowing:YES];
+        [Activity removeFollowFromProfile:self.profiles[indexPath.row] withCompletion:^(BOOL succeeded, NSError *error) {
+            [self handleAccessoryTap:cell isFollowing:YES];
+        }];
     }];
 
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
 
-    [controller addAction:addAction];
+    [controller addAction:unfollowAction];
     [controller addAction:cancelAction];
 
     [self presentViewController:controller animated:YES completion:nil];
