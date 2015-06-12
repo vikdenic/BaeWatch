@@ -63,7 +63,6 @@
 -(void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
     [Profile queryAllProfilesWithSearchString:searchController.searchBar.text andBlock:^(NSArray *profiles, NSError *error) {
-
         self.profiles = profiles;
         [self.tableView reloadData];
     }];
@@ -97,6 +96,11 @@
     else
     {
         [self handleAccessoryTap:cell isFollowing:YES];
+    }
+
+    if ([profile.user.objectId isEqualToString:[User currentUser].objectId])
+    {
+        cell.accessoryView = nil;
     }
 
     return cell;

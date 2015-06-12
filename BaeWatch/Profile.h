@@ -12,6 +12,7 @@
 
 @property User *user;
 @property NSString *fullName;
+@property NSString *fullNameLC;
 @property PFFile *profileImageFile;
 @property NSString *phoneNumber;
 

@@ -12,6 +12,7 @@
 @implementation Profile
 
 @dynamic fullName;
+@dynamic fullNameLC;
 @dynamic user;
 @dynamic profileImageFile;
 @dynamic phoneNumber;
@@ -42,8 +43,8 @@
             PFQuery *query = [PFQuery queryWithClassName:@"Profile"];
             [query whereKey:@"fullNameLC" containsString:string.lowercaseString];
 
-            [query findObjectsInBackgroundWithBlock:^(NSArray *moreObjects, NSError *error) {
-                completionHandler(moreObjects, error);
+            [query findObjectsInBackgroundWithBlock:^(NSArray *moreProfiles, NSError *error) {
+                completionHandler(moreProfiles, error);
             }];
         }
         else

@@ -108,6 +108,7 @@
 
             Profile *currentProfile = [[UniversalProfile sharedInstance] profile];
             currentProfile.fullName = name;
+            currentProfile.fullNameLC = name.lowercaseString;
 
             [currentProfile saveInBackground];
 

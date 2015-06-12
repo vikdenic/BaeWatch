@@ -97,7 +97,9 @@ NSString *const kSegueInfoEntryToPhoneEntry = @"InfoEntryToPhoneEntrySegue";
 {
     Profile *profile = [[UniversalProfile sharedInstance] profile];
 
-    [profile setFullName:[NSString stringWithFormat:@"%@ %@", self.entryCell.firstNameTextField.text, self.entryCell.lastNameTextField.text]];
+    NSString *nameString = [NSString stringWithFormat:@"%@ %@", self.entryCell.firstNameTextField.text, self.entryCell.lastNameTextField.text];
+    [profile setFullName:nameString];
+    [profile setFullNameLC:nameString.lowercaseString];
 
     PFFile *imagefile = [PFFile fileWithData:UIImagePNGRepresentation(self.selectedImage)];
     [profile setProfileImageFile:imagefile];
