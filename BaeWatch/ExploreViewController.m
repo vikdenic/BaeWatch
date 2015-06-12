@@ -7,7 +7,6 @@
 //
 
 #import "ExploreViewController.h"
-#import "SearchResultsTableViewController.h"
 #import "SocialSearchResultsTableViewController.h"
 
 @interface ExploreViewController () <UITableViewDataSource>
@@ -23,25 +22,13 @@
 {
     [super viewDidLoad];
     [self implementSearchBar];
-
-    [self.navigationController hidesBarsOnSwipe];
 }
 
--(void)implementSearchBar
+#pragma mark - Table view data source
+
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    SearchResultsTableViewController *resultsVC = [storyboard instantiateViewControllerWithIdentifier:@"SocialSearchResultsTableViewController"];
-
-    self.controller = [[UISearchController alloc] initWithSearchResultsController:resultsVC];
-    [self.controller setSearchResultsUpdater:resultsVC];
-
-    self.controller.hidesNavigationBarDuringPresentation = NO;
-    self.controller.dimsBackgroundDuringPresentation = YES;
-    self.definesPresentationContext = YES;
-    
-    [self.navigationItem setTitleView:self.controller.searchBar];
-    [self.controller.searchBar setPlaceholder:@"Search for a user"];
-    [self.controller.searchBar sizeToFit];
+    return 2;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -62,10 +49,83 @@
     }
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+#pragma mark - Table view delegate
+
+-(BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(id)sender
 {
-    return 2;
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+
+    if (indexPath.row == 0)
+    {
+        if ([User currentUser].fbId == nil)
+        {
+            [self presentFBLinkAlertController];
+            return NO;
+        }
+    }
+
+    if (indexPath.row == 1)
+    {
+        if (ABAddressBookGetAuthorizationStatus() != kABAuthorizationStatusAuthorized)
+        {
+            [self presentAddressBookAlertController];
+            return NO;
+        }
+    }
+
+    return YES;
 }
+
+#pragma mark - Helpers
+
+-(void)implementSearchBar
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    SocialSearchResultsTableViewController *resultsVC = [storyboard instantiateViewControllerWithIdentifier:@"SocialSearchResultsTableViewController"];
+
+    self.controller = [[UISearchController alloc] initWithSearchResultsController:resultsVC];
+    [self.controller setSearchResultsUpdater:resultsVC];
+
+    self.controller.hidesNavigationBarDuringPresentation = NO;
+    self.controller.dimsBackgroundDuringPresentation = YES;
+    self.definesPresentationContext = YES;
+
+    [self.navigationItem setTitleView:self.controller.searchBar];
+    [self.controller.searchBar setPlaceholder:@"Search for a user"];
+    [self.controller.searchBar sizeToFit];
+}
+
+-(void)presentFBLinkAlertController
+{
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Link your Facebook?" message:nil preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction *unfollowAction = [UIAlertAction actionWithTitle:@"Continue" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+
+        [FBManager linkFBtoUser:[User currentUser] withCompletion:^(NSError *error) {
+            [self performSegueWithIdentifier:@"ExploreToSocialResultsSegue" sender:self];
+        }];
+    }];
+
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+
+    [controller addAction:unfollowAction];
+    [controller addAction:cancelAction];
+
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
+-(void)presentAddressBookAlertController
+{
+    UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Access Disabled" message:@"To switch on Contacts, go to this phone's Settings > BaeWatch" preferredStyle:UIAlertControllerStyleAlert];
+
+    UIAlertAction *okayAction = [UIAlertAction actionWithTitle:@"Continue" style:UIAlertActionStyleDefault handler:nil];
+
+    [controller addAction:okayAction];
+
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
+#pragma mark - Segue
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {

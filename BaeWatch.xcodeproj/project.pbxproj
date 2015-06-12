@@ -10,6 +10,7 @@
 		79DDD1499272950D69587FF7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 13BEBBB78B317F6AF75FE180 /* libPods.a */; };
 		93083ADA1B17B42C009E956F /* FollowingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93083AD91B17B42C009E956F /* FollowingViewController.m */; };
 		93083ADD1B17BB7B009E956F /* FollowersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93083ADC1B17BB7B009E956F /* FollowersViewController.m */; };
+		930CECC61B2A6F5100445C95 /* SearchResultTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 930CECC51B2A6F5100445C95 /* SearchResultTableViewCell.m */; };
 		930E89591B1FE3D800ACACEF /* SocialSearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 930E89581B1FE3D800ACACEF /* SocialSearchResultsTableViewController.m */; };
 		930E895C1B1FEC7B00ACACEF /* ContactsManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 930E895B1B1FEC7B00ACACEF /* ContactsManager.m */; };
 		932AF8941B06946A007E859D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 932AF8931B06946A007E859D /* main.m */; };
@@ -30,7 +31,6 @@
 		93A59C671B0989E000D2AB76 /* NameEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A59C661B0989E000D2AB76 /* NameEntryViewController.m */; };
 		93A59C6F1B098CEF00D2AB76 /* NameEntryTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 93A59C6E1B098CEF00D2AB76 /* NameEntryTableViewCell.m */; };
 		93BCC9B01B1A29F700B5AADA /* ExploreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93BCC9AF1B1A29F700B5AADA /* ExploreViewController.m */; };
-		93BCC9B31B1A4B7100B5AADA /* SearchResultsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93BCC9B21B1A4B7100B5AADA /* SearchResultsTableViewController.m */; };
 		93D8928F1B14075C0045C02B /* VZAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D8928E1B14075C0045C02B /* VZAlert.m */; };
 		93D892921B14F95D0045C02B /* PhoneEntryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D892911B14F95D0045C02B /* PhoneEntryViewController.m */; };
 		93D892981B152BFD0045C02B /* Activity.m in Sources */ = {isa = PBXBuildFile; fileRef = 93D892971B152BFD0045C02B /* Activity.m */; };
@@ -54,6 +54,8 @@
 		93083AD91B17B42C009E956F /* FollowingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowingViewController.m; sourceTree = "<group>"; };
 		93083ADB1B17BB7B009E956F /* FollowersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowersViewController.h; sourceTree = "<group>"; };
 		93083ADC1B17BB7B009E956F /* FollowersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowersViewController.m; sourceTree = "<group>"; };
+		930CECC41B2A6F5100445C95 /* SearchResultTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultTableViewCell.h; sourceTree = "<group>"; };
+		930CECC51B2A6F5100445C95 /* SearchResultTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultTableViewCell.m; sourceTree = "<group>"; };
 		930E89571B1FE3D800ACACEF /* SocialSearchResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialSearchResultsTableViewController.h; sourceTree = "<group>"; };
 		930E89581B1FE3D800ACACEF /* SocialSearchResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialSearchResultsTableViewController.m; sourceTree = "<group>"; };
 		930E895A1B1FEC7B00ACACEF /* ContactsManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsManager.h; sourceTree = "<group>"; };
@@ -93,8 +95,6 @@
 		93A59C6E1B098CEF00D2AB76 /* NameEntryTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NameEntryTableViewCell.m; sourceTree = "<group>"; };
 		93BCC9AE1B1A29F700B5AADA /* ExploreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExploreViewController.h; sourceTree = "<group>"; };
 		93BCC9AF1B1A29F700B5AADA /* ExploreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExploreViewController.m; sourceTree = "<group>"; };
-		93BCC9B11B1A4B7100B5AADA /* SearchResultsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsTableViewController.h; sourceTree = "<group>"; };
-		93BCC9B21B1A4B7100B5AADA /* SearchResultsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsTableViewController.m; sourceTree = "<group>"; };
 		93D8928D1B14075C0045C02B /* VZAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VZAlert.h; sourceTree = "<group>"; };
 		93D8928E1B14075C0045C02B /* VZAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VZAlert.m; sourceTree = "<group>"; };
 		93D892901B14F95D0045C02B /* PhoneEntryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PhoneEntryViewController.h; sourceTree = "<group>"; };
@@ -155,10 +155,10 @@
 				932AF89E1B06946A007E859D /* Images.xcassets */,
 				932AF8A01B06946A007E859D /* LaunchScreen.xib */,
 				932AF8911B06946A007E859D /* Supporting Files */,
+				932AF8FD1B07C630007E859D /* Models */,
 				93A59C641B090D7500D2AB76 /* Utilities */,
 				932AF8FC1B07C626007E859D /* View Controllers */,
 				93A59C6C1B098CC800D2AB76 /* Custom Cells */,
-				932AF8FD1B07C630007E859D /* Models */,
 			);
 			path = BaeWatch;
 			sourceTree = "<group>";
@@ -211,8 +211,6 @@
 				93083ADC1B17BB7B009E956F /* FollowersViewController.m */,
 				93BCC9AE1B1A29F700B5AADA /* ExploreViewController.h */,
 				93BCC9AF1B1A29F700B5AADA /* ExploreViewController.m */,
-				93BCC9B11B1A4B7100B5AADA /* SearchResultsTableViewController.h */,
-				93BCC9B21B1A4B7100B5AADA /* SearchResultsTableViewController.m */,
 				930E89571B1FE3D800ACACEF /* SocialSearchResultsTableViewController.h */,
 				930E89581B1FE3D800ACACEF /* SocialSearchResultsTableViewController.m */,
 			);
@@ -254,6 +252,8 @@
 			children = (
 				93A59C6D1B098CEF00D2AB76 /* NameEntryTableViewCell.h */,
 				93A59C6E1B098CEF00D2AB76 /* NameEntryTableViewCell.m */,
+				930CECC41B2A6F5100445C95 /* SearchResultTableViewCell.h */,
+				930CECC51B2A6F5100445C95 /* SearchResultTableViewCell.m */,
 			);
 			name = "Custom Cells";
 			sourceTree = "<group>";
@@ -411,12 +411,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				930CECC61B2A6F5100445C95 /* SearchResultTableViewCell.m in Sources */,
 				932AF8EC1B06DDB2007E859D /* User.m in Sources */,
 				93083ADA1B17B42C009E956F /* FollowingViewController.m in Sources */,
 				93D892921B14F95D0045C02B /* PhoneEntryViewController.m in Sources */,
 				930E89591B1FE3D800ACACEF /* SocialSearchResultsTableViewController.m in Sources */,
 				93D892981B152BFD0045C02B /* Activity.m in Sources */,
-				93BCC9B31B1A4B7100B5AADA /* SearchResultsTableViewController.m in Sources */,
 				932AF8FB1B07ABA2007E859D /* UniversalProfile.m in Sources */,
 				93D8928F1B14075C0045C02B /* VZAlert.m in Sources */,
 				93A59C6F1B098CEF00D2AB76 /* NameEntryTableViewCell.m in Sources */,

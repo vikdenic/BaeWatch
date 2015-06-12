@@ -132,12 +132,16 @@
     }];
 }
 
+//TODO: Set User's fbId string as well
 +(void)linkFBtoUser:(User *)user withCompletion:(void(^)(NSError *error))completionHandler
 {
     NSArray *permissionsArray = @[@"public_profile", @"user_friends", @"email"];
 
     [PFFacebookUtils linkUserInBackground:user withReadPermissions:permissionsArray block:^(BOOL succeeded, NSError *error) {
-        completionHandler(error);
+
+        [FBManager setUsersFbIdWithBlock:^(NSError *error) {
+            completionHandler(error);
+        }];
     }];
 }
 

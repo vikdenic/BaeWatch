@@ -7,6 +7,7 @@
 //
 
 #import "SocialSearchResultsTableViewController.h"
+#import "SearchResultTableViewCell.h"
 #import "ContactsManager.h"
 #import "FBManager.h"
 #import "Activity.h"
@@ -24,10 +25,6 @@
 {
     [super viewDidLoad];
     self.followingProfiles = [NSMutableArray new];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-
 
     [Activity retrieveFollowingWithBlock:^(NSArray *activities, NSError *error) {
         for (Activity *activity in activities)
@@ -53,8 +50,6 @@
     if (self.searchingFacebook)
     {
         [FBManager findFBFriendsWithBlock:^(NSArray *users, NSError *error) {
-            //TODO: Return profiles of FB friends here
-//            self.profiles = [NSMutableArray arrayWithArray:users];
             [Profile queryAllProfilesFromUsers:users withBlock:^(NSArray *profiles, NSError *error) {
                 self.profiles = profiles;
                 [self.tableView reloadData];
@@ -62,6 +57,8 @@
         }];
     }
 }
+
+#pragma mark - Search results updater
 
 -(void)updateSearchResultsForSearchController:(UISearchController *)searchController
 {
@@ -74,11 +71,6 @@
 
 #pragma mark - Table view data source
 
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//    // Return the number of sections.
-//    return 0;
-//}
-//
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
@@ -87,9 +79,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SocialResultCell" forIndexPath:indexPath];
+    SearchResultTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SocialResultCell" forIndexPath:indexPath];
     Profile *profile = [self.profiles objectAtIndex:indexPath.row];
-    cell.textLabel.text = profile.fullName;
+    
+    cell.nameLabel.text = profile.fullName;
+
+    [profile.profileImageFile getDataInBackgroundWithBlock:^(NSData *data, NSError *error)
+    {
+        cell.profileImageView.file = profile.profileImageFile;
+        [cell.profileImageView loadInBackground];
+    }];
 
     if ([self.followingProfiles containsObject:profile.objectId])
     {
@@ -102,6 +101,8 @@
 
     return cell;
 }
+
+#pragma mark - Helpers
 
 -(void)handleAccessoryTap:(UITableViewCell *)cell isFollowing:(BOOL)isFollowing
 {
@@ -120,8 +121,6 @@
     cell.accessoryView = checkmarkButton;
 }
 
-
-
 -(void)onCheckmarkAccessoryTapped:(id)sender event:(id)event
 {
     NSSet *touches = [event allTouches];
@@ -131,8 +130,6 @@
     NSIndexPath *indexPath = [self.tableView indexPathForRowAtPoint: currentTouchPosition];
     if (indexPath != nil)
     {
-        [self tableView:self.tableView accessoryButtonTappedForRowWithIndexPath: indexPath];
-
         [self presentAlertController:indexPath];
     }
 }
@@ -147,9 +144,7 @@
     if (indexPath != nil)
     {
         [Activity followToProfile:self.profiles[indexPath.row] withCompletion:^(BOOL succeeded, NSError *error) {
-            [self tableView:self.tableView accessoryButtonTappedForRowWithIndexPath: indexPath];
-
-            UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+            SearchResultTableViewCell *cell = (SearchResultTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
             [self handleAccessoryTap:cell isFollowing:NO];
         }];
     }
@@ -160,7 +155,7 @@
     UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"Unfollow?" message:nil preferredStyle:UIAlertControllerStyleAlert];
 
     UIAlertAction *unfollowAction = [UIAlertAction actionWithTitle:@"Unfollow" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+        SearchResultTableViewCell *cell = (SearchResultTableViewCell *) [self.tableView cellForRowAtIndexPath:indexPath];
         [Activity removeFollowFromProfile:self.profiles[indexPath.row] withCompletion:^(BOOL succeeded, NSError *error) {
             [self handleAccessoryTap:cell isFollowing:YES];
         }];
@@ -173,54 +168,5 @@
 
     [self presentViewController:controller animated:YES completion:nil];
 }
-
--(void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
-{
-
-}
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
