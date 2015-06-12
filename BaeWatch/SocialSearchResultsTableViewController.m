@@ -78,6 +78,52 @@
 
 #pragma mark - Helpers
 
+-(void)setupPullToRefresh
+{
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(refreshProfiles) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = self.refreshControl;
+}
+
+-(void)refreshProfiles
+{
+    self.followingProfiles = [NSMutableArray new];
+
+    [Activity retrieveFollowingWithBlock:^(NSArray *activities, NSError *error) {
+        for (Activity *activity in activities)
+        {
+            Profile *profile = activity.toProfile;
+            [self.followingProfiles addObject:profile.objectId];
+        }
+        [self.tableView reloadData];
+        [self.refreshControl endRefreshing];
+    }];
+
+    if (self.searchingContacts)
+    {
+        [ContactsManager requestContactsAccess:^(BOOL success, ABAddressBookRef addressBook, CFErrorRef error) {
+            [ContactsManager listPeopleInAddressBook:addressBook withCompletion:^(NSArray *numbers) {
+                [ContactsManager findProfilesFromNumbers:numbers withCompletion:^(NSArray *profiles) {
+                    self.profiles = profiles;
+                    [self.tableView reloadData];
+                    [self.refreshControl endRefreshing];
+                }];
+            }];
+        }];
+    }
+
+    if (self.searchingFacebook)
+    {
+        [FBManager findFBFriendsWithBlock:^(NSArray *users, NSError *error) {
+            [Profile queryAllProfilesFromUsers:users withBlock:^(NSArray *profiles, NSError *error) {
+                self.profiles = profiles;
+                [self.tableView reloadData];
+                [self.refreshControl endRefreshing];
+            }];
+        }];
+    }
+}
+
 -(void)handleAccessoryTap:(UITableViewCell *)cell isFollowing:(BOOL)isFollowing
 {
     UIImage *image = [UIImage imageNamed:@"checkmarkAccessoryImage"];
@@ -141,52 +187,6 @@
     [controller addAction:cancelAction];
 
     [self presentViewController:controller animated:YES completion:nil];
-}
-
--(void)setupPullToRefresh
-{
-    self.refreshControl = [[UIRefreshControl alloc] init];
-    [self.refreshControl addTarget:self action:@selector(refreshProfiles) forControlEvents:UIControlEventValueChanged];
-    self.refreshControl = self.refreshControl;
-}
-
--(void)refreshProfiles
-{
-    self.followingProfiles = [NSMutableArray new];
-
-    [Activity retrieveFollowingWithBlock:^(NSArray *activities, NSError *error) {
-        for (Activity *activity in activities)
-        {
-            Profile *profile = activity.toProfile;
-            [self.followingProfiles addObject:profile.objectId];
-        }
-        [self.tableView reloadData];
-        [self.refreshControl endRefreshing];
-    }];
-
-    if (self.searchingContacts)
-    {
-        [ContactsManager requestContactsAccess:^(BOOL success, ABAddressBookRef addressBook, CFErrorRef error) {
-            [ContactsManager listPeopleInAddressBook:addressBook withCompletion:^(NSArray *numbers) {
-                [ContactsManager findProfilesFromNumbers:numbers withCompletion:^(NSArray *profiles) {
-                    self.profiles = profiles;
-                    [self.tableView reloadData];
-                    [self.refreshControl endRefreshing];
-                }];
-            }];
-        }];
-    }
-
-    if (self.searchingFacebook)
-    {
-        [FBManager findFBFriendsWithBlock:^(NSArray *users, NSError *error) {
-            [Profile queryAllProfilesFromUsers:users withBlock:^(NSArray *profiles, NSError *error) {
-                self.profiles = profiles;
-                [self.tableView reloadData];
-                [self.refreshControl endRefreshing];
-            }];
-        }];
-    }
 }
 
 @end
